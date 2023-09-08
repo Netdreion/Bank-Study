@@ -1,9 +1,13 @@
 import { useState } from "react";
-
+import ExcuseCreater from "./Components/Aplication1";
 import "./App.css";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ExcuseCreater />
+    </>
+  );
 }
 
 export default App;
