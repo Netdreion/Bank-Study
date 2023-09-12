@@ -1,11 +1,12 @@
 import { useState } from "react";
-import ExcuseCreater from "./Components/Aplication1";
+import TransactionHistory from "./components/TransactionHistory";
+import TransactionFilters from "./components/TransactionFilters";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <ExcuseCreater />
+      <TransactionHistory />
     </>
   );
 }

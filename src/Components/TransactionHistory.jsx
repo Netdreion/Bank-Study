@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import data from "./components/Data.jsx";
 
 const TransactionHistory = () => {
-  return <div></div>;
+  return (
+    <div>
+      {data.map((transaction) => {
+        return <li key={id}>{transaction}</li>;
+      })}
+    </div>
+  );
 };
 
 export default TransactionHistory;
