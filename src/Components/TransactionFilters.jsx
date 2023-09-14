@@ -36,7 +36,12 @@ const TransactionFilters = () => {
       <div>
         {output.map((item, index) => (
           // Render the filtered data here, adjust this based on your data structure
-          <div key={index}>{item.description}</div>
+          <div key={index}>
+            <ul>
+              <li>{item.description}</li>
+              <li>{item.amount}</li>
+            </ul>
+          </div>
         ))}
       </div>
     </div>
