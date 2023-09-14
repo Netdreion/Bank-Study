@@ -6,6 +6,17 @@ const TransactionFilters = () => {
     startDate: "",
     endDate: "",
   });
+  const [output, setOutput] = useState([]);
+
+  const filter = () => {
+    const filteredData = data.filter((datadate) => {
+      // Assuming datadate is an object with a 'date' property, adjust this condition accordingly
+      return (
+        datadate.description >= date.startDate && datadate.date <= date.endDate
+      );
+    });
+    setOutput(filteredData);
+  };
 
   return (
     <div>
@@ -21,6 +32,13 @@ const TransactionFilters = () => {
         value={date.endDate}
         onChange={(e) => setDate({ ...date, endDate: e.target.value })}
       ></input>
+      <button onClick={() => filter()}>Filter</button>
+      <div>
+        {output.map((item, index) => (
+          // Render the filtered data here, adjust this based on your data structure
+          <div key={index}>{item.description}</div>
+        ))}
+      </div>
     </div>
   );
 };
