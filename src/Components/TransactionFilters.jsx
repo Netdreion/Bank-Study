@@ -35,9 +35,9 @@ const TransactionFilters = () => {
       <button onClick={() => filter()}>Filter</button>
       <div>
         {output.map((item, index) => (
-          // Render the filtered data here, adjust this based on your data structure
           <div key={index}>
             <ul>
+              <li>{item.date}</li>
               <li>{item.description}</li>
               <li>{item.amount}</li>
             </ul>
