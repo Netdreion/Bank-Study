@@ -15,6 +15,11 @@ const TransactionFilters = () => {
     setOutput(filteredData);
   };
 
+  const accountBalance = output.reduce(
+    (total, transaction) => (total += transaction.amount),
+    0
+  );
+
   return (
     <div className="container">
       <div className="select-container">
@@ -44,6 +49,7 @@ const TransactionFilters = () => {
           <button onClick={() => filter()}>Filter</button>
         </div>
         <div className="results">
+          <div>Account Balance:{accountBalance}</div>
           <ul>
             {output.map((item, index) => (
               <div key={index}>
