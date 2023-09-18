@@ -5,10 +5,11 @@ import "./App.css";
 import TransactionFilters from "./components/TransactionFilters";
 
 function App() {
+  const [login, setLogin] = useState(false);
   return (
     <>
       <Login />
-      <TransactionFilters />
+      {login && <TransactionFilters />}
     </>
   );
 }
