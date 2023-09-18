@@ -49,7 +49,6 @@ const TransactionFilters = () => {
           <button onClick={() => filter()}>Filter</button>
         </div>
         <div className="results">
-          <div>Account Balance:{accountBalance}</div>
           <ul>
             {output.map((item, index) => (
               <div key={index}>
@@ -61,6 +60,7 @@ const TransactionFilters = () => {
               </div>
             ))}
           </ul>
+          <div className="balance">Account Balance:{accountBalance}</div>
         </div>
       </div>
     </div>
