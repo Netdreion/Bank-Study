@@ -6,9 +6,10 @@ import TransactionFilters from "./components/TransactionFilters";
 
 function App() {
   const [login, setLogin] = useState(false);
+
   return (
     <>
-      <Login />
+      <Login login={login} />
       {login && <TransactionFilters />}
     </>
   );

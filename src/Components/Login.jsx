@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = () => {
+const Login = (setLogin) => {
   const [user, setUser] = useState({
     userName: "",
     password: "",
@@ -27,7 +27,7 @@ const Login = () => {
         placeholder="password"
         onChange={handleChange}
       ></input>
-      <button>{user.userName.length < 5 ? "login" : "logout"}</button>
+      <button> {user.userName === "" ? "login" : "logout"}</button>
     </div>
   );
 };
