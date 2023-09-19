@@ -1,12 +1,31 @@
 import { useState } from "react";
 
-const Login = (setLogin) => {
+const Login = () => {
+  const userSetup = {
+    userName: "oz",
+    password: "1234",
+  };
+  Object.freeze(userSetup);
+
   const [user, setUser] = useState({
     userName: "",
     password: "",
   });
+
+  const handleLogin = () => {
+    if (
+      user.userName === userSetup.userName &&
+      user.password === userSetup.password
+    ) {
+      alert("login succesfull");
+    } else {
+      alert("enter a valid username & password");
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setUser((prevUser) => ({
       ...prevUser,
       [name]: value,
@@ -27,7 +46,7 @@ const Login = (setLogin) => {
         placeholder="password"
         onChange={handleChange}
       ></input>
-      <button> {user.userName === "" ? "login" : "logout"}</button>
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };
