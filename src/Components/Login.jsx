@@ -1,17 +1,17 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 const Login = ({
-  userSetup,
+  // userSetup,
+  // loginForm,
   handleLogin,
-  user,
-  setUser,
+  setLoginForm,
   userName,
   password,
 }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setUser((prevUser) => ({
+    setLoginForm((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));

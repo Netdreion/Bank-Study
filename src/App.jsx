@@ -11,35 +11,39 @@ function App() {
   };
   Object.freeze(userSetup);
 
-  const [mount, setMount] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const [user, setUser] = useState({
+  // state for the user login form
+  const [loginForm, setLoginForm] = useState({
     userName: "",
     password: "",
   });
+
+  // when clicked the button compare
+  // the userSetup object to the loginForm state object for password and userName
   const handleLogin = () => {
     if (
-      user.userName === userSetup.userName &&
-      user.password === userSetup.password
+      loginForm.userName === userSetup.userName &&
+      loginForm.password === userSetup.password
     ) {
-      setMount(true);
+      setLoggedIn(true);
       alert("login succesfull");
     } else {
       alert("enter a valid username & password");
-      setMount(false);
+      setLoggedIn(false);
     }
   };
   return (
     <>
       <Login
-        setUser={setUser}
-        password={user.password}
-        userName={user.userName}
-        user={user}
+        setLoginForm={setLoginForm}
+        password={loginForm.password}
+        userName={loginForm.userName}
         handleLogin={handleLogin}
-        userSetup={userSetup}
+        // loginForm={loginForm}
+        // userSetup={userSetup}
       />
-      {mount && <TransactionFilters />}
+      {loggedIn && <TransactionFilters />}
     </>
   );
 }
