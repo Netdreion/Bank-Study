@@ -10,6 +10,9 @@ function App() {
     password: "1234",
   };
   Object.freeze(userSetup);
+
+  const [mount, setMount] = useState(false);
+
   const [user, setUser] = useState({
     userName: "",
     password: "",
@@ -19,9 +22,11 @@ function App() {
       user.userName === userSetup.userName &&
       user.password === userSetup.password
     ) {
+      setMount(true);
       alert("login succesfull");
     } else {
       alert("enter a valid username & password");
+      setMount(false);
     }
   };
   return (
@@ -34,7 +39,7 @@ function App() {
         handleLogin={handleLogin}
         userSetup={userSetup}
       />
-      {<TransactionFilters />}
+      {mount && <TransactionFilters />}
     </>
   );
 }
