@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Login from "./components/Login";
-
+import Context from "./components/Context";
 import "./App.css";
 import TransactionFilters from "./components/TransactionFilters";
 
@@ -43,6 +43,7 @@ function DashBoard() {
         // loginForm={loginForm}
         // userSetup={userSetup}
       />
+      {loggedIn && <Context />}
       {loggedIn && <TransactionFilters />}
     </>
   );

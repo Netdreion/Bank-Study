@@ -66,6 +66,14 @@ body {
   color: #007bff;
 }
 
+.context {
+  padding: 20px;
+  margin: 50px;
+  border: 2px greenyellow;
+  text-decoration-color: #007bff;
+  background-color: #0056b3;
+}
+
 /* Media query for responsiveness */
 @media (max-width: 768px) {
   .container {
