@@ -9,6 +9,7 @@ function DashBoard() {
   const userSetup = {
     userName: "oz",
     password: "1234",
+    acountNo: "*******73",
   };
   Object.freeze(userSetup);
 
@@ -61,7 +62,13 @@ function DashBoard() {
         // loginForm={loginForm}
         // userSetup={userSetup}
       />
-      {loggedIn && <Context accountBalance={accountBalance} />}
+      {loggedIn && (
+        <Context
+          accountBalance={accountBalance}
+          name={userSetup.userName}
+          acountNo={userSetup.acountNo}
+        />
+      )}
       {loggedIn && (
         <TransactionFilters
           date={date}
