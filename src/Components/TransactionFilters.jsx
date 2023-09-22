@@ -1,30 +1,21 @@
 import React, { useState } from "react";
 import data from "./Data";
 
-const TransactionFilters = () => {
-  const [date, setDate] = useState({
-    startDate: "",
-    endDate: "",
-  });
-  const [output, setOutput] = useState([]);
-
-  const filter = () => {
-    const filteredData = data.filter((datadate) => {
-      return datadate.date >= date.startDate && datadate.date <= date.endDate;
-    });
-    setOutput(filteredData);
-  };
-
-  const accountBalance = output.reduce(
-    (total, transaction) => (total += transaction.amount),
-    0
-  );
-
+const TransactionFilters = ({
+  date,
+  filter,
+  accountBalance,
+  output,
+  setOutput,
+  startDate,
+  endDate,
+  setDate,
+}) => {
   return (
     <div className="container">
       <div className="select-container">
         <select
-          value={date.startDate}
+          value={startDate}
           onChange={(e) => setDate({ ...date, startDate: e.target.value })}
         >
           <option value="">Select Start Date</option>
@@ -35,7 +26,7 @@ const TransactionFilters = () => {
           <option value={"2023-09-19"}>2023-09-19</option>
         </select>
         <select
-          value={date.endDate}
+          value={endDate}
           onChange={(e) => setDate({ ...date, endDate: e.target.value })}
         >
           <option value="">Select End Date</option>
@@ -60,7 +51,6 @@ const TransactionFilters = () => {
               </div>
             ))}
           </ul>
-          <div className="balance">Account Balance:{accountBalance}</div>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Context from "./components/Context";
 import "./App.css";
 import TransactionFilters from "./components/TransactionFilters";
+import data from "./components/Data";
 
 function DashBoard() {
   const userSetup = {
@@ -18,6 +19,11 @@ function DashBoard() {
     userName: "",
     password: "",
   });
+  const [date, setDate] = useState({
+    startDate: "",
+    endDate: "",
+  });
+  const [output, setOutput] = useState([]);
 
   // when clicked the button compare
   // the userSetup object to the loginForm state object for password and userName
@@ -33,6 +39,18 @@ function DashBoard() {
       setLoggedIn(false);
     }
   };
+
+  const filter = () => {
+    const filteredData = data.filter((datadate) => {
+      return datadate.date >= date.startDate && datadate.date <= date.endDate;
+    });
+    setOutput(filteredData);
+  };
+
+  const accountBalance = output.reduce(
+    (total, transaction) => (total += transaction.amount),
+    0
+  );
   return (
     <>
       <Login
@@ -43,8 +61,18 @@ function DashBoard() {
         // loginForm={loginForm}
         // userSetup={userSetup}
       />
-      {loggedIn && <Context />}
-      {loggedIn && <TransactionFilters />}
+      {loggedIn && <Context accountBalance={accountBalance} />}
+      {loggedIn && (
+        <TransactionFilters
+          date={date}
+          filter={filter}
+          output={output}
+          startDate={date.startDate}
+          endDate={date.endDate}
+          setOutput={setOutput}
+          setDate={setDate}
+        />
+      )}
     </>
   );
 }

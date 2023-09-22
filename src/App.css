@@ -67,8 +67,11 @@ body {
 }
 
 .context {
-  padding: 20px;
+  padding: 20px 20px;
   margin: 50px;
+  width: 150%;
+  height: 40%;
+  align-items: center;
   border: 2px greenyellow;
   text-decoration-color: #007bff;
   background-color: #0056b3;
