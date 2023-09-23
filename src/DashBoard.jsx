@@ -4,6 +4,7 @@ import Context from "./components/Context";
 import "./App.css";
 import TransactionFilters from "./components/TransactionFilters";
 import data from "./components/Data";
+import TransactionHistory from "./components/TransactionHistory";
 
 function DashBoard() {
   const userSetup = {
@@ -84,6 +85,7 @@ function DashBoard() {
             setOutput={setOutput}
             setDate={setDate}
           />
+          <TransactionHistory />
         </div>
       )}
     </>
