@@ -4,7 +4,7 @@ import Login from "./Components/Login.jsx";
 import Context from "./Components/Context.jsx";
 import TransactionFilters from "./Components/TransactionFilters.jsx";
 import TransactionHistory from "./Components/TransactionHistory.jsx";
-import data from "./components/Data.jsx";
+import data from "./Components/Data.jsx";
 
 const DashBoard = () => {
   const userSetup = {
