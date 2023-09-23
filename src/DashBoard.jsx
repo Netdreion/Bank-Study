@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import Login from "./components/Login.jsx";
-import Context from "./components/Context.jsx";
-import TransactionFilters from "./components/TransactionFilters.jsx";
-import TransactionHistory from "./components/TransactionHistory.jsx";
+import Login from "./Components/Login.jsx";
+import Context from "./Components/Context.jsx";
+import TransactionFilters from "./Components/TransactionFilters.jsx";
+import TransactionHistory from "./Components/TransactionHistory.jsx";
 import data from "./components/Data.jsx";
 
 const DashBoard = () => {
