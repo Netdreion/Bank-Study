@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Context from "./components/Context";
 import "./App.css";
 import TransactionFilters from "./components/TransactionFilters";
 import data from "./components/Data";
 import TransactionHistory from "./components/TransactionHistory";
 import Login from "./components/Login";
+import Context from "./components/Context";
 
 function DashBoard() {
   const userSetup = {
