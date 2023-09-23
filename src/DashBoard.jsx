@@ -14,6 +14,7 @@ function DashBoard() {
   Object.freeze(userSetup);
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
 
   // state for the user login form
   const [loginForm, setLoginForm] = useState({
@@ -70,15 +71,20 @@ function DashBoard() {
         />
       )}
       {loggedIn && (
-        <TransactionFilters
-          date={date}
-          filter={filter}
-          output={output}
-          startDate={date.startDate}
-          endDate={date.endDate}
-          setOutput={setOutput}
-          setDate={setDate}
-        />
+        <button onClick={() => setShowFilter(true)}> TransactionFilters</button>
+      )}
+      {showFilter && (
+        <div>
+          <TransactionFilters
+            date={date}
+            filter={filter}
+            output={output}
+            startDate={date.startDate}
+            endDate={date.endDate}
+            setOutput={setOutput}
+            setDate={setDate}
+          />
+        </div>
       )}
     </>
   );
