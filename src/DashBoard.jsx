@@ -6,7 +6,7 @@ import TransactionFilters from "./components/TransactionFilters.jsx";
 import TransactionHistory from "./components/TransactionHistory.jsx";
 import data from "./components/Data.jsx";
 
-function DashBoard() {
+const DashBoard = () => {
   const userSetup = {
     userName: "oz",
     password: "1234",
@@ -90,6 +90,6 @@ function DashBoard() {
       )}
     </>
   );
-}
+};
 
 export default DashBoard;
