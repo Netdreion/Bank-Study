@@ -1,4 +1,4 @@
-const Context = ({ accountBalance, name, accountNo }) => {
+const Context = ({ accountBalance, name, acountNo }) => {
   return (
     <>
       <div className="context">
@@ -6,7 +6,7 @@ const Context = ({ accountBalance, name, accountNo }) => {
         <table>
           <th>one deposit account </th>
           <tr>name:{name}</tr>
-          <tr>account number:{accountNo}</tr>
+          <tr>account number:{acountNo}</tr>
           <tr> acoount balance:{accountBalance}</tr>
         </table>
       </div>
