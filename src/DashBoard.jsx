@@ -12,36 +12,34 @@ const DashBoard = () => {
     password: "1234",
     acountNo: "*******73",
   };
-  Object.freeze(userSetup);
 
   const [show, setShow] = useState({
     loggedInShow: false,
     filterShow: false,
   });
 
-  // state for the user login form
   const [loginForm, setLoginForm] = useState({
     userName: "",
     password: "",
   });
+
   const [date, setDate] = useState({
     startDate: "",
     endDate: "",
   });
+
   const [output, setOutput] = useState([]);
 
-  // when clicked the button compare
-  // the userSetup object to the loginForm state object for password and userName
   const handleLogin = () => {
     if (
       loginForm.userName === userSetup.userName &&
       loginForm.password === userSetup.password
     ) {
-      setLoggedIn(true);
-      alert("login succesfull");
+      setShow({ ...show, loggedInShow: true });
+      alert("Login successful");
     } else {
-      alert("enter a valid username & password");
-      setLoggedIn(false);
+      alert("Enter a valid username & password");
+      setShow({ ...show, loggedInShow: false });
     }
   };
 
@@ -56,6 +54,7 @@ const DashBoard = () => {
     (total, transaction) => (total += transaction.amount),
     0
   );
+
   return (
     <>
       <Login
@@ -63,20 +62,21 @@ const DashBoard = () => {
         password={loginForm.password}
         userName={loginForm.userName}
         handleLogin={handleLogin}
-        // loginForm={loginForm}
-        // userSetup={userSetup}
       />
-      {loggedIn && (
+      {show.loggedInShow && (
         <Context
           accountBalance={accountBalance}
           name={userSetup.userName}
           acountNo={userSetup.acountNo}
         />
       )}
-      {loggedIn && (
-        <button onClick={() => setShowFilter(true)}> TransactionFilters</button>
+      {show.loggedInShow && (
+        <button onClick={() => setShow({ ...show, filterShow: true })}>
+          {" "}
+          TransactionFilters
+        </button>
       )}
-      {showFilter && (
+      {show.filterShow && (
         <div>
           <TransactionFilters
             date={date}
