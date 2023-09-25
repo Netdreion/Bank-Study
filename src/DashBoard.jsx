@@ -16,6 +16,7 @@ const DashBoard = () => {
   const [show, setShow] = useState({
     loggedInShow: false,
     filterShow: false,
+    historyShow: false,
   });
 
   const [loginForm, setLoginForm] = useState({
@@ -87,7 +88,10 @@ const DashBoard = () => {
             setOutput={setOutput}
             setDate={setDate}
           />
-          <TransactionHistory />
+          <button onClick={() => setShow({ ...show, historyShow: true })}>
+            all transaction history
+          </button>
+          {show.historyShow && <TransactionHistory />}
         </div>
       )}
     </>
