@@ -14,8 +14,10 @@ const DashBoard = () => {
   };
   Object.freeze(userSetup);
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
+  const [show, setShow] = useState({
+    loggedInShow: false,
+    filterShow: false,
+  });
 
   // state for the user login form
   const [loginForm, setLoginForm] = useState({
