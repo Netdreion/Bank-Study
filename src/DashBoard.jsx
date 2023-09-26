@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Login from "./Components/Login.jsx";
 import Context from "./Components/Context.jsx";
@@ -57,13 +57,15 @@ const DashBoard = () => {
   );
 
   return (
-    <>
-      <Login
-        setLoginForm={setLoginForm}
-        password={loginForm.password}
-        userName={loginForm.userName}
-        handleLogin={handleLogin}
-      />
+    <div className="dashboard-container">
+      <div className="login-container">
+        <Login
+          setLoginForm={setLoginForm}
+          password={loginForm.password}
+          userName={loginForm.userName}
+          handleLogin={handleLogin}
+        />
+      </div>
       {show.loggedInShow && (
         <Context
           accountBalance={accountBalance}
@@ -72,13 +74,15 @@ const DashBoard = () => {
         />
       )}
       {show.loggedInShow && (
-        <button onClick={() => setShow({ ...show, filterShow: true })}>
-          {" "}
-          TransactionFilters
+        <button
+          className="filter-button"
+          onClick={() => setShow({ ...show, filterShow: true })}
+        >
+          Filter Transactions
         </button>
       )}
       {show.filterShow && (
-        <div>
+        <div className="filter-container">
           <TransactionFilters
             date={date}
             filter={filter}
@@ -88,13 +92,16 @@ const DashBoard = () => {
             setOutput={setOutput}
             setDate={setDate}
           />
-          <button onClick={() => setShow({ ...show, historyShow: true })}>
-            all transaction history
+          <button
+            className="history-button"
+            onClick={() => setShow({ ...show, historyShow: true })}
+          >
+            View Transaction History
           </button>
           {show.historyShow && <TransactionHistory />}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
