@@ -94,9 +94,11 @@ const DashBoard = () => {
           />
           <button
             className="history-button"
-            onClick={() => setShow({ ...show, historyShow: true })}
+            onClick={() => setShow({ ...show, historyShow: !show.historyShow })}
           >
-            View Transaction History
+            {show.historyShow
+              ? "Close Transaction History"
+              : "View Transaction History"}
           </button>
           {show.historyShow && <TransactionHistory />}
         </div>
