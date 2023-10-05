@@ -41,6 +41,7 @@ const DashBoard = () => {
     } else {
       alert("Enter a valid username & password");
       setShow({ ...show, loggedInShow: false });
+      setLoginForm({ ...loginForm, userName: "", password: "" });
     }
   };
 
