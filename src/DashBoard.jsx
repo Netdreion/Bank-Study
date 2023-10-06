@@ -56,7 +56,14 @@ const DashBoard = () => {
     (total, transaction) => (total += transaction.amount),
     0
   );
-
+  const HandleLogOut = () => {
+    setShow({
+      ...show,
+      loggedInShow: false,
+      filterShow: false,
+      historyShow: false,
+    });
+  };
   return (
     <div className="dashboard-container">
       <div className="login-container">
