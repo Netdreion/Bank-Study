@@ -79,7 +79,9 @@ const DashBoard = () => {
           className="filter-button"
           onClick={() => setShow({ ...show, filterShow: !show.filterShow })}
         >
-          Filter Transactions
+          {show.filterShow
+            ? "Close Transaction filter"
+            : "View Transaction filter"}
         </button>
       )}
       {show.filterShow && (
