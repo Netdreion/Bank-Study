@@ -77,7 +77,7 @@ const DashBoard = () => {
       {show.loggedInShow && (
         <button
           className="filter-button"
-          onClick={() => setShow({ ...show, filterShow: true })}
+          onClick={() => setShow({ ...show, filterShow: !show.filterShow })}
         >
           Filter Transactions
         </button>
