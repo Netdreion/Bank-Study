@@ -31,6 +31,8 @@ const DashBoard = () => {
 
   const [output, setOutput] = useState([]);
 
+  //  if logged in then next click should be logout
+  // if already logged out then try to login using the validation logic
   const handleLogin = () => {
     if (
       loginForm.userName === userSetup.userName &&
@@ -56,14 +58,7 @@ const DashBoard = () => {
     (total, transaction) => (total += transaction.amount),
     0
   );
-  const HandleLogOut = () => {
-    setShow({
-      ...show,
-      loggedInShow: false,
-      filterShow: false,
-      historyShow: false,
-    });
-  };
+
   return (
     <div className="dashboard-container">
       <div className="login-container">
@@ -72,8 +67,8 @@ const DashBoard = () => {
           password={loginForm.password}
           userName={loginForm.userName}
           handleLogin={handleLogin}
-          handleLogOut={HandleLogOut}
-          show={show.loggedInShow}
+          loggedInShow={show.loggedInShow}
+          setShow={setShow}
         />
       </div>
       {show.loggedInShow && (

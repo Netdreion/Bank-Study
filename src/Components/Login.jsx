@@ -1,8 +1,8 @@
 //import React from "react";
 
 const Login = ({
-  show,
-  handleLogOut,
+  loggedInShow,
+  setShow,
   handleLogin,
   setLoginForm,
   userName,
@@ -31,7 +31,22 @@ const Login = ({
         placeholder="password"
         onChange={handleChange}
       ></input>
-      <button onClick={handleLogin}> {!show ? " Login" : "Logout"}</button>
+      <button
+        onClick={() =>
+          !loggedInShow
+            ? handleLogin()
+            : setShow((prevState) => {
+                return {
+                  ...prevState,
+                  loggedInShow: false,
+                };
+              })
+        }
+      >
+        {" "}
+        {!loggedInShow ? " Login" : "Logout"}
+      </button>
+      {/* <button      {show.loggedInShow?   onClick={handleLogin} :  }   >  {!show ? " Login" : "Logout"}</button> */}
     </div>
   );
 };
