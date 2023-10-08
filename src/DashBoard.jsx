@@ -72,6 +72,8 @@ const DashBoard = () => {
           password={loginForm.password}
           userName={loginForm.userName}
           handleLogin={handleLogin}
+          handleLogOut={HandleLogOut}
+          show={show.loggedInShow}
         />
       </div>
       {show.loggedInShow && (

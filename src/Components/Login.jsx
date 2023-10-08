@@ -1,8 +1,8 @@
 //import React from "react";
 
 const Login = ({
-  // userSetup,
-  // loginForm,
+  show,
+  handleLogOut,
   handleLogin,
   setLoginForm,
   userName,
@@ -31,7 +31,7 @@ const Login = ({
         placeholder="password"
         onChange={handleChange}
       ></input>
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin}> {!show ? " Login" : "Logout"}</button>
     </div>
   );
 };
