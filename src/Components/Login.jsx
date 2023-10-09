@@ -21,7 +21,7 @@ const Login = ({
     <div>
       <input
         name="userName"
-        value={userName}
+        value={loggedInShow ? "" : userName}
         placeholder="user-name"
         onChange={handleChange}
       ></input>
@@ -31,6 +31,7 @@ const Login = ({
         placeholder="password"
         onChange={handleChange}
       ></input>
+
       <button
         onClick={() =>
           !loggedInShow
