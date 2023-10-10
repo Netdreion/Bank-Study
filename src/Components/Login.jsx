@@ -21,13 +21,13 @@ const Login = ({
     <div>
       <input
         name="userName"
-        value={loggedInShow ? "" : userName}
+        value={userName}
         placeholder="user-name"
         onChange={handleChange}
       ></input>
       <input
         name="password"
-        value={password}
+        value={loggedInShow ? "" : password}
         placeholder="password"
         onChange={handleChange}
       ></input>
