@@ -46,9 +46,8 @@ const Login = ({
         }
       >
         {" "}
-        {!loggedInShow
-          ? " Login"
-          : setLoginForm((userName = ""), (password = "")) && "Logout"}
+        {!loggedInShow ? " Login" : "Logout"}
+        {loggedInShow && setLoginForm((userName = ""), (password = ""))}
       </button>
       {/* <button      {show.loggedInShow?   onClick={handleLogin} :  }   >  {!show ? " Login" : "Logout"}</button> */}
     </div>
