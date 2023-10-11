@@ -69,6 +69,7 @@ const DashBoard = () => {
           handleLogin={handleLogin}
           loggedInShow={show.loggedInShow}
           setShow={setShow}
+          loginForm={loginForm}
         />
       </div>
       {show.loggedInShow && (

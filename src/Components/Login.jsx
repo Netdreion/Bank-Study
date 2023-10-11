@@ -7,6 +7,7 @@ const Login = ({
   setLoginForm,
   userName,
   password,
+  loginForm,
 }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,13 +22,13 @@ const Login = ({
     <div>
       <input
         name="userName"
-        value={userName}
+        value={!loggedInShow ? userName : ""}
         placeholder="user-name"
         onChange={handleChange}
       ></input>
       <input
         name="password"
-        value={loggedInShow ? "" : password}
+        value={!loggedInShow ? password : ""}
         placeholder="password"
         onChange={handleChange}
       ></input>
@@ -45,7 +46,9 @@ const Login = ({
         }
       >
         {" "}
-        {!loggedInShow ? " Login" : "Logout"}
+        {!loggedInShow
+          ? " Login"
+          : setLoginForm((userName = ""), (password = "")) && "Logout"}
       </button>
       {/* <button      {show.loggedInShow?   onClick={handleLogin} :  }   >  {!show ? " Login" : "Logout"}</button> */}
     </div>
