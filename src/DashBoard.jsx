@@ -108,7 +108,9 @@ const DashBoard = () => {
               ? "Close Transaction History"
               : "View Transaction History"}
           </button>
-          {show.historyShow && <TransactionHistory />}
+          {show.historyShow && (
+            <TransactionHistory loggedInShow={show.loggedInShow} />
+          )}
         </div>
       )}
     </div>

@@ -1,20 +1,22 @@
 import React from "react";
 import data from "./Data";
 
-const TransactionHistory = () => {
+const TransactionHistory = ({ loggedInShow }) => {
   return (
     <div>
-      <ul>
-        {data.map((transaction) => {
-          return (
-            <li key={data.id}>
-              <div>Date:{transaction.date}</div>
-              <div>Description:{transaction.description}</div>
-              <div>Amount:{transaction.amount}</div>
-            </li>
-          );
-        })}
-      </ul>
+      {loggedInShow && (
+        <ul>
+          {data.map((transaction) => {
+            return (
+              <li key={data.id}>
+                <div>Date:{transaction.date}</div>
+                <div>Description:{transaction.description}</div>
+                <div>Amount:{transaction.amount}</div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };
