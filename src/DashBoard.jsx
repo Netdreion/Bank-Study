@@ -56,7 +56,7 @@ const DashBoard = () => {
 
   const accountBalance = output.reduce(
     (total, transaction) => (total += transaction.amount),
-    0
+    359
   );
 
   return (

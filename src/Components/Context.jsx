@@ -7,7 +7,7 @@ const Context = ({ accountBalance, name, acountNo }) => {
           <th>one deposit account </th>
           <tr>name:{name}</tr>
           <tr>account number:{acountNo}</tr>
-          <tr> acoount balance:{accountBalance}</tr>
+          <tr> acoount balance:{accountBalance}.00$</tr>
         </table>
       </div>
     </>
