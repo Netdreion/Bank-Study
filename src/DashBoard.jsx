@@ -99,7 +99,9 @@ const DashBoard = () => {
             endDate={date.endDate}
             setOutput={setOutput}
             setDate={setDate}
+            loggedInShow={show.loggedInShow}
           />
+
           <button
             className="history-button"
             onClick={() => setShow({ ...show, historyShow: !show.historyShow })}
@@ -108,6 +110,7 @@ const DashBoard = () => {
               ? "Close Transaction History"
               : "View Transaction History"}
           </button>
+
           {show.historyShow && (
             <TransactionHistory loggedInShow={show.loggedInShow} />
           )}
