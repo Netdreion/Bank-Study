@@ -58,6 +58,16 @@ const DashBoard = () => {
     (total, transaction) => (total += transaction.amount),
     359
   );
+  const resetState = () => {
+    setShow({
+      loggedInShow: false,
+      filterShow: false,
+      historyShow: false,
+    });
+    setLoginForm({ userName: "", password: "" });
+    setDate({ startDate: "", endDate: "" });
+    setOutput([]);
+  };
 
   return (
     <div className="dashboard-container">
@@ -70,6 +80,7 @@ const DashBoard = () => {
           loggedInShow={show.loggedInShow}
           setShow={setShow}
           loginForm={loginForm}
+          resetState={resetState}
         />
       </div>
       {show.loggedInShow && (

@@ -8,6 +8,7 @@ const Login = ({
   userName,
   password,
   loginForm,
+  resetState,
 }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,18 +34,7 @@ const Login = ({
         onChange={handleChange}
       ></input>
 
-      <button
-        onClick={() =>
-          !loggedInShow
-            ? handleLogin()
-            : setShow((prevState) => {
-                return {
-                  ...prevState,
-                  loggedInShow: false,
-                };
-              })
-        }
-      >
+      <button onClick={() => (!loggedInShow ? handleLogin() : resetState())}>
         {" "}
         {!loggedInShow ? " Login" : "Logout"}
         {loggedInShow && setLoginForm((userName = ""), (password = ""))}
