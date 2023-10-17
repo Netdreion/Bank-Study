@@ -5,6 +5,7 @@ import Context from "./Components/Context.jsx";
 import TransactionFilters from "./Components/TransactionFilters.jsx";
 import TransactionHistory from "./Components/TransactionHistory.jsx";
 import data from "./Components/Data.jsx";
+import Investing from "./Components/Investing";
 
 const DashBoard = () => {
   const userSetup = {
@@ -90,6 +91,7 @@ const DashBoard = () => {
           acountNo={userSetup.acountNo}
         />
       )}
+      {show.loggedInShow && <Investing />}
       {show.loggedInShow && (
         <button
           className="filter-button"
@@ -112,6 +114,7 @@ const DashBoard = () => {
             setDate={setDate}
             loggedInShow={show.loggedInShow}
           />
+          {show.loggedInShow && <Investing />}
 
           <button
             className="history-button"
