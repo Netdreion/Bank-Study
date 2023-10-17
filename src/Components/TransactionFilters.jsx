@@ -7,7 +7,6 @@ const TransactionFilters = ({
   startDate,
   endDate,
   setDate,
-  loggedInShow,
 }) => {
   return (
     <div className="container">
