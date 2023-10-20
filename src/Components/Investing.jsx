@@ -3,6 +3,7 @@ import { useState } from "react";
 const Investing = () => {
   const [show, setShow] = useState(false);
   const [buyingPower, setBuyingPower] = useState(10000);
+  const[watcList,setWatcList=useState([])]
 
   return (
     <div>
