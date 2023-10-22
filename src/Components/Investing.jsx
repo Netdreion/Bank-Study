@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Investing = () => {
   const [show, setShow] = useState(false);
@@ -6,22 +6,22 @@ const Investing = () => {
   const [watcList, setWatcList] = useState([]);
 
   const url = "https://finnhub.io/api/v1";
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`${url}/quote?symbol=AAPL`);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Received data:", data);
-      } else {
-        console.error(`Failed to fetch data. Status: ${response.status}`);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${url}/quote?symbol=AAPL`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Received data:", data);
+        } else {
+          console.error(`Failed to fetch data. Status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchData();
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
