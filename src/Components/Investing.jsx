@@ -5,11 +5,18 @@ const Investing = () => {
   const [buyingPower, setBuyingPower] = useState(10000);
   const [watcList, setWatcList] = useState([]);
 
+  const secretKey = "ckumj8pr01qmtr8ld550ckumj8pr01qmtr8ld55g"; // Your Finnhub Secret Key
   const url = "https://finnhub.io/api/v1";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/quote?symbol=AAPL`);
+        const response = await fetch(`${url}/quote?symbol=AAPL`, {
+          headers: {
+            "X-Finnhub-Secret": secretKey,
+          },
+        });
+
         if (response.ok) {
           const data = await response.json();
           console.log("Received data:", data);
