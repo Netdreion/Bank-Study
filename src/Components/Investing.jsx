@@ -5,7 +5,7 @@ const Investing = () => {
   const [buyingPower, setBuyingPower] = useState(10000);
   const [watcList, setWatcList] = useState([]);
 
-  const secretKey = "ckumj8pr01qmtr8ld550ckumj8pr01qmtr8ld55g"; // Your Finnhub Secret Key
+  const secretKey = "ckvhajhr01qq199itd4gckvhajhr01qq199itd50"; // Your Finnhub Secret Key
   const url = "https://finnhub.io/api/v1";
 
   useEffect(() => {
