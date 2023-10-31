@@ -5,7 +5,7 @@ const Investing = () => {
   const [buyingPower, setBuyingPower] = useState(10000);
   const [watcList, setWatcList] = useState([]);
 
-  const secretKey = "ckvhajhr01qq199itd4gckvhajhr01qq199itd50"; // Your Finnhub Secret Key
+  const apiKey = "ckvhajhr01qq199itd4gckvhajhr01qq199itd50"; // Your Finnhub API Key
   const url = "https://finnhub.io/api/v1";
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Investing = () => {
       try {
         const response = await fetch(`${url}/quote?symbol=AAPL`, {
           headers: {
-            "X-Finnhub-Secret": secretKey,
+            "X-Finnhub-Token": apiKey,
           },
         });
 
@@ -46,18 +46,11 @@ const Investing = () => {
             Buying Power
             {buyingPower}
           </h4>
+
           <table>
-            <thead>
-              <tr>
-                <th>Header 1</th>
-                <th>Header 2</th>
-              </tr>
-            </thead>
             <tbody>
-              <tr>
-                <td>Data 1</td>
-                <td>Data 2</td>
-              </tr>
+              <tr>...</tr>
+              <tr>...</tr>
             </tbody>
           </table>
         </div>
