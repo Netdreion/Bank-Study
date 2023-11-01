@@ -4,6 +4,7 @@ import data from "./Data";
 const TransactionHistory = () => {
   return (
     <div>
+      <h1>history</h1>
       <ul>
         {data.map((transaction) => {
           return (
