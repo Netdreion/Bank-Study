@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 const Investing = () => {
   const [show, setShow] = useState(false);
   const [buyingPower, setBuyingPower] = useState(10000);
-  const [watcList, setWatcList] = useState([]);
 
   const apiKey = "ckvhajhr01qq199itd4gckvhajhr01qq199itd50"; // Your Finnhub API Key
   const url = "https://finnhub.io/api/v1";
