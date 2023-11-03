@@ -47,9 +47,21 @@ const Investing = () => {
           </h4>
 
           <table>
+            <thead>
+              <tr>
+                <th>stocks</th>
+                <th>crypto</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr>...</tr>
-              <tr>...</tr>
+              <tr>
+                <td>Apple, price</td>
+                <td>solana, price</td>
+              </tr>
+              <tr>
+                <td>tesla, price</td>
+                <td>doge, price</td>
+              </tr>
             </tbody>
           </table>
         </div>
