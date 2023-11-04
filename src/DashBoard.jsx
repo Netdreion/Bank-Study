@@ -91,7 +91,7 @@ const DashBoard = () => {
           acountNo={userSetup.acountNo}
         />
       )}
-      {show.loggedInShow && <Investing />}
+      {show.loggedInShow && <Investing filterShow={show.filterShow} />}
       {show.loggedInShow && (
         <button
           className="filter-button"

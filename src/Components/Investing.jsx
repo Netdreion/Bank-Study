@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Investing = () => {
+const Investing = ({ filterShow }) => {
   const [show, setShow] = useState(false);
   const [buyingPower, setBuyingPower] = useState(10000);
 
@@ -38,7 +38,7 @@ const Investing = () => {
       >
         Investing
       </button>
-      {show && (
+      {show && !filterShow && (
         <div>
           <h2>Welcome to fivoncae investing</h2>
           <h4>
