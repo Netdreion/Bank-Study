@@ -114,7 +114,6 @@ const DashBoard = () => {
             setDate={setDate}
             loggedInShow={show.loggedInShow}
           />
-          {show.loggedInShow && <Investing />}
 
           <button
             className="history-button"
