@@ -1,4 +1,14 @@
 const LoanPage = () => {
+
+    const[formData,setFormData]=({
+        name:'',
+        adress:"",
+        income:'',
+        debt:"",name:'',
+        LoanAmount:"",
+        
+    })
+
   return (
     <div>
       <h1>Loan Aplication</h1>
