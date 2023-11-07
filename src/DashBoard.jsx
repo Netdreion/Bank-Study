@@ -6,7 +6,7 @@ import TransactionFilters from "./Components/TransactionFilters.jsx";
 import TransactionHistory from "./Components/TransactionHistory.jsx";
 import data from "./Components/Data.jsx";
 import Investing from "./Components/Investing";
-import LoanPage from "./Components/LoanApp";
+//import LoanPage from "./Components/LoanApp";
 
 const DashBoard = () => {
   const userSetup = {
@@ -93,7 +93,7 @@ const DashBoard = () => {
         />
       )}
       {show.loggedInShow && <Investing />}
-      {show.loggedInShow && <LoanPage />}
+      {/*show.loggedInShow && <LoanPage />*/}
       {show.loggedInShow && (
         <button
           className="filter-button"

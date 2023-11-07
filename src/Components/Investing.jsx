@@ -4,7 +4,7 @@ const Investing = () => {
   const [show, setShow] = useState(false);
   const [buyingPower, setBuyingPower] = useState(10000);
 
-  const apiKey = "ckvhajhr01qq199itd4gckvhajhr01qq199itd50"; // Your Finnhub API Key
+  const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
   const url = "https://finnhub.io/api/v1";
 
   useEffect(() => {

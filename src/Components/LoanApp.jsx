@@ -1,4 +1,4 @@
-const LoanPage = () => {
+/*const LoanPage = () => {
 
     const[formData,setFormData]=({
         name:'',
@@ -27,3 +27,4 @@ const LoanPage = () => {
   );
 };
 export default LoanPage;
+*/
