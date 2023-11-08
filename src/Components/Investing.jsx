@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const Investing = () => {
   const [show, setShow] = useState(false);
   const [buyingPower, setBuyingPower] = useState(10000);
+  const [recivedData, setRecievedData] = useState([]);
 
   const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
   const url = "https://finnhub.io/api/v1";
@@ -10,15 +11,14 @@ const Investing = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/quote?symbol=AAPL`, {
-          headers: {
-            "X-Finnhub-Token": apiKey,
-          },
-        });
+        const response = await fetch(
+          `${url}/quote?symbol=AAPL&token=${apiKey}`
+        );
 
         if (response.ok) {
           const data = await response.json();
           console.log("Received data:", data);
+          setRecievedData(data);
         } else {
           console.error(`Failed to fetch data. Status: ${response.status}`);
         }
