@@ -40,33 +40,30 @@ const Investing = () => {
       </button>
 
       {show && receivedData && (
-        <div>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Stock</th>
-                  <th>Price</th>
-                  <th>daily change</th>
-                  <th>% change</th>
-                  <th>highest price</th>
-                  <th>lowest price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Apple</td>
-                  <td>{receivedData.c}</td>
-                  <td>{receivedData.d}</td>
-                  <td>{receivedData.dp}</td>
-                  <td>{receivedData.h}</td>
-                  <td>{receivedData.l}</td>
-
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Daily Change</th>
+                <th>% Change</th>
+                <th>Highest Price</th>
+                <th>Lowest Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Apple</td>
+                <td>{receivedData.c}</td>
+                <td>{receivedData.d}</td>
+                <td>{receivedData.dp}</td>
+                <td>{receivedData.h}</td>
+                <td>{receivedData.l}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )}
     </div>
