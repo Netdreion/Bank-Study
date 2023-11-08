@@ -92,45 +92,49 @@ const DashBoard = () => {
           acountNo={userSetup.acountNo}
         />
       )}
-      {show.loggedInShow && <Investing />}
-      {/*show.loggedInShow && <LoanPage />*/}
-      {show.loggedInShow && (
-        <button
-          className="filter-button"
-          onClick={() => setShow({ ...show, filterShow: !show.filterShow })}
-        >
-          {show.filterShow
-            ? "Close Transaction filter"
-            : "View Transaction filter"}
-        </button>
-      )}
-      {show.filterShow && (
-        <div className="filter-container">
-          <TransactionFilters
-            date={date}
-            filter={filter}
-            output={output}
-            startDate={date.startDate}
-            endDate={date.endDate}
-            setOutput={setOutput}
-            setDate={setDate}
-            loggedInShow={show.loggedInShow}
-          />
-
+      <div className="buttons-container">
+        {show.loggedInShow && <Investing />}
+        {/*show.loggedInShow && <LoanPage />*/}
+        {show.loggedInShow && (
           <button
-            className="history-button"
-            onClick={() => setShow({ ...show, historyShow: !show.historyShow })}
+            className="filter-button"
+            onClick={() => setShow({ ...show, filterShow: !show.filterShow })}
           >
-            {show.historyShow
-              ? "Close Transaction History"
-              : "View Transaction History"}
+            {show.filterShow
+              ? "Close Transaction filter"
+              : "View Transaction filter"}
           </button>
+        )}
+        {show.filterShow && (
+          <div className="filter-container">
+            <TransactionFilters
+              date={date}
+              filter={filter}
+              output={output}
+              startDate={date.startDate}
+              endDate={date.endDate}
+              setOutput={setOutput}
+              setDate={setDate}
+              loggedInShow={show.loggedInShow}
+            />
 
-          {show.historyShow && (
-            <TransactionHistory loggedInShow={show.loggedInShow} />
-          )}
-        </div>
-      )}
+            <button
+              className="history-button"
+              onClick={() =>
+                setShow({ ...show, historyShow: !show.historyShow })
+              }
+            >
+              {show.historyShow
+                ? "Close Transaction History"
+                : "View Transaction History"}
+            </button>
+
+            {show.historyShow && (
+              <TransactionHistory loggedInShow={show.loggedInShow} />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,40 +1,45 @@
-/* App.css */
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
 
-/* Style for the dashboard container */
+/* Container for the entire dashboard */
 .dashboard-container {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #fff;
   min-height: 100vh;
-  color: #007bff;
 }
 
-/* Style for the login container */
+/* Login container */
 .login-container {
-  display: flex; /* Add this line */
+  display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #007bff;
 }
 
-/* Style for the login form */
+/* Login form */
 .login-form {
   display: inline-block;
   text-align: left;
   padding: 10px;
-  color: #007bff;
 }
 
-/* Style for input fields */
+/* Input fields */
 input[type="text"],
 input[type="password"],
 input[type="date"] {
@@ -43,10 +48,9 @@ input[type="date"] {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 3px;
-  color: #007bff;
 }
 
-/* Style for the login button */
+/* Login button */
 .login-button {
   background-color: #007bff;
   color: #fff;
@@ -60,8 +64,9 @@ input[type="date"] {
   background-color: #0056b3;
 }
 
-/* Style for the filter button */
-.filter-button {
+/* Filter and history buttons */
+.filter-button,
+.history-button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -71,32 +76,18 @@ input[type="date"] {
   margin-top: 20px;
 }
 
-.filter-button:hover {
-  background-color: #0056b3;
-}
-
-/* Style for the history button */
-.history-button {
-  background-color: #007bff;
-  color: #1c2acd;
-  border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
+.filter-button:hover,
 .history-button:hover {
   background-color: #0056b3;
 }
 
-/* Style for the context container */
+/* Context container */
 .context-container {
   text-align: center;
   margin-top: 20px;
 }
 
-/* Style for the context information */
+/* Context information */
 .context-info {
   background-color: #0056b3;
   color: #fff;
@@ -105,31 +96,25 @@ input[type="date"] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-  .login-container {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-/* Define a CSS class for the table */
+/* Table container */
 .table-container {
   margin: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
+  background-color: #fff;
+  overflow: hidden;
 }
 
-/* Style the table headers */
+/* Table headers */
 th {
-  background-color: #333;
+  background-color: #007bff;
   color: #fff;
-  padding: 10px;
+  padding: 12px;
+  text-align: center;
 }
 
-/* Style the table rows */
+/* Table rows */
 td {
   padding: 10px;
   text-align: center;
@@ -143,8 +128,23 @@ table {
 
 /* Style odd and even rows differently for better readability */
 tbody tr:nth-child(odd) {
-  background-color: #e5e5e5;
+  background-color: #f5f5f5;
 }
+
 tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
   background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+  }
 }
