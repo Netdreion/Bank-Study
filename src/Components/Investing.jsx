@@ -36,7 +36,7 @@ const Investing = () => {
           setShow(!show);
         }}
       >
-        Investing
+        {!show ? "Investing" : "close Investing"}
       </button>
 
       {show && receivedData && (
