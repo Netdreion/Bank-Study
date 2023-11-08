@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
+const url = "https://finnhub.io/api/v1";
 
 const Investing = () => {
+  const [receivedData, setReceivedData] = useState(null);
   const [show, setShow] = useState(false);
-  const [buyingPower, setBuyingPower] = useState(10000);
-  const [recivedData, setRecievedData] = useState([]);
-
-  const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
-  const url = "https://finnhub.io/api/v1";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,8 +16,7 @@ const Investing = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Received data:", data);
-          setRecievedData(data);
+          setReceivedData(data);
         } else {
           console.error(`Failed to fetch data. Status: ${response.status}`);
         }
@@ -26,6 +24,7 @@ const Investing = () => {
         console.error(error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -33,34 +32,28 @@ const Investing = () => {
     <div>
       <button
         onClick={() => {
-          !show ? setShow(true) : setShow(!show);
+          setShow(!show);
         }}
       >
         Investing
       </button>
-      {show && (
-        <div>
-          <h2>Welcome to fivoncae investing</h2>
-          <h4>
-            Buying Power
-            {buyingPower}
-          </h4>
 
+      {show && receivedData && (
+        <div>
           <table>
             <thead>
               <tr>
-                <th>stocks</th>
-                <th>crypto</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>daily change</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Apple, price</td>
-                <td>solana, price</td>
-              </tr>
-              <tr>
-                <td>tesla, price</td>
-                <td>doge, price</td>
+                <td>Apple</td>
+                <td>{receivedData.c}</td>
+                <td>{receivedData.d}</td>
+                <td>{/*receivedData*/}</td>
               </tr>
             </tbody>
           </table>
