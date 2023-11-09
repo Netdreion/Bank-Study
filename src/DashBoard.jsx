@@ -73,6 +73,7 @@ const DashBoard = () => {
 
   return (
     <div className="dashboard-container">
+      <h1>finovance</h1>
       <div className="login-container">
         <Login
           setLoginForm={setLoginForm}
