@@ -10,11 +10,14 @@ const Investing = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${url}/quote?symbol=AAPL&token=${apiKey}`
+        const symbols = ["AAPL", "MSFT", "AMZN"];
+        const promises = symbols.map((symbol) =>
+          fetch(`${url}/quote?symbol=${symbol}&token=${apiKey}`).then(
+            (response) => response.json()
+          )
         );
 
-        const data = await response.json();
+        const data = await Promise.all(promises);
         setReceivedData(data);
         console.log(receivedData);
       } catch (error) {
