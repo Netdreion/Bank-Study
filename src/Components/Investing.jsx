@@ -14,13 +14,9 @@ const Investing = () => {
           `${url}/quote?symbol=AAPL&token=${apiKey}`
         );
 
-        if (response.ok) {
-          const data = await response.json();
-          setReceivedData(data);
-          console.log(receivedData);
-        } else {
-          console.error(`Failed to fetch data. Status: ${response.status}`);
-        }
+        const data = await response.json();
+        setReceivedData(data);
+        console.log(receivedData);
       } catch (error) {
         console.error(error);
       }
