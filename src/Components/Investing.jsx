@@ -6,11 +6,11 @@ const url = "https://finnhub.io/api/v1";
 const Investing = () => {
   const [receivedData, setReceivedData] = useState(null);
   const [show, setShow] = useState(false);
+  const symbols = ["AAPL", "MSFT", "AMZN"];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const symbols = ["AAPL", "MSFT", "AMZN"];
         const promises = symbols.map((symbol) =>
           fetch(`${url}/quote?symbol=${symbol}&token=${apiKey}`).then(
             (response) => response.json()
@@ -49,18 +49,22 @@ const Investing = () => {
                 <th>% Change</th>
                 <th>Highest Price</th>
                 <th>Lowest Price</th>
+                <th>previous day</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Apple</td>
-                <td>{receivedData.c}</td>
-                <td>{receivedData.d}</td>
-                <td>{receivedData.dp}</td>
-                <td>{receivedData.h}</td>
-                <td>{receivedData.l}</td>
-                <td></td>
-              </tr>
+              {receivedData.map((stock, index) => (
+                <tr key={index}>
+                  <td>{symbols[index]}</td>
+                  <td>{stock.c}</td>
+                  <td>{stock.d}</td>
+                  <td>{stock.dp}</td>
+                  <td>{stock.h}</td>
+                  <td>{stock.l}</td>
+                  <td>{stock.pc}</td>
+                  <td></td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
