@@ -4,28 +4,33 @@ const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
 const url = "https://finnhub.io/api/v1";
 
 const Investing = () => {
-  const [receivedData, setReceivedData] = useState(null);
+  const [receivedStockData, setReceivedStockData] = useState(null);
+  const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
   const symbols = ["AAPL", "MSFT", "AMZN"];
   const cryptoSymbols = ["ETH/BTC", "LTC/BTC", "BNB/BTC"];
 
-  useEffect(() => {
-    const fetchCrytoData = async () => {
-      try {
-        const promises = cryptoSymbols.map((symbol) =>
-          fetch(
-            `${url}/crypto/symbol=${symbol}?exchange=binance&token=${apiKey}`
-          ).then((response) => response.json())
-        );
-        console.log(promises);
-        const data = await Promise.all(promises);
-        setReceivedData(data);
-        console.log(receivedData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  }, []);
+  const fetchCrytoData = async () => {
+    try {
+      const promises = cryptoSymbols.map((symbol) =>
+        fetch(
+          `${url}/crypto/symbol?exchange=binance&token=${apiKey}&symbol=${symbol}`
+        ).then((response) => response.json())
+      );
+
+      console.log("this is crypto", promises);
+
+      const resolvedData = await Promise.all(promises);
+
+      // Extract the 'result' array from each resolved promise
+      const data = resolvedData.map((promise) => promise.result);
+
+      setReceivedCryptoData(data);
+      console.log(receivedCryptoData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,14 +42,14 @@ const Investing = () => {
         );
 
         const data = await Promise.all(promises);
-        setReceivedData(data);
-        console.log(receivedData);
+        setReceivedStockData(data);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
+    fetchCrytoData();
   }, []);
 
   return (
@@ -57,7 +62,7 @@ const Investing = () => {
         {!show ? "Investing" : "close Investing"}
       </button>
 
-      {show && receivedData && (
+      {show && receivedStockData && (
         <div className="table-container">
           <table>
             <thead>
@@ -72,7 +77,7 @@ const Investing = () => {
               </tr>
             </thead>
             <tbody>
-              {receivedData.map((stock, index) => (
+              {receivedStockData.map((stock, index) => (
                 <tr key={index}>
                   <td>{symbols[index]}</td>
                   <td>{stock.c}</td>
