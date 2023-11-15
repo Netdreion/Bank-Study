@@ -10,27 +10,27 @@ const Investing = () => {
   const symbols = ["AAPL", "MSFT", "AMZN"];
   const cryptoSymbols = ["ETH/BTC", "LTC/BTC", "BNB/BTC"];
 
-  const fetchCrytoData = async () => {
-    try {
-      const promises = cryptoSymbols.map((symbol) =>
-        fetch(
-          `${url}/crypto/symbol?exchange=binance&token=${apiKey}&symbol=${symbol}`
-        ).then((response) => response.json())
-      );
+  useEffect(() => {
+    const fetchCrytoData = async () => {
+      try {
+        const promises = cryptoSymbols.map((symbol) =>
+          fetch(`${url}/crypto/symbol?exchange=binance&token=${apiKey}`).then(
+            (response) => response.json()
+          )
+        );
 
-      console.log("this is crypto", promises);
+        const resolvedData = await Promise.all(promises);
 
-      const resolvedData = await Promise.all(promises);
+        // Extract the 'result' array from each resolved promise
+        const data = resolvedData.map((promise) => promise.result);
 
-      // Extract the 'result' array from each resolved promise
-      const data = resolvedData.map((promise) => promise.result);
-
-      setReceivedCryptoData(data);
-      console.log(receivedCryptoData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        setReceivedCryptoData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCrytoData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +49,6 @@ const Investing = () => {
     };
 
     fetchData();
-    fetchCrytoData();
   }, []);
 
   return (
@@ -86,6 +85,34 @@ const Investing = () => {
                   <td>{stock.h}</td>
                   <td>{stock.l}</td>
                   <td>{stock.pc}</td>
+                  <td></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {show && receivedCryptoData && (
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Daily Change</th>
+                <th>% Change</th>
+                <th>Highest Price</th>
+                <th>Lowest Price</th>
+                <th>previous day</th>
+              </tr>
+            </thead>
+            <tbody>
+              {receivedCryptoData.map((crypto, index) => (
+                <tr key={index}>
+                  <td>{symbols[index]}</td>
+                  <td>{crypto.c}</td>
+                  <td>{crypto.d}</td>
+
                   <td></td>
                 </tr>
               ))}
