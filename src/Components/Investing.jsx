@@ -14,9 +14,9 @@ const Investing = () => {
     const fetchCrytoData = async () => {
       try {
         const promises = cryptoSymbols.map((symbol) =>
-          fetch(`${url}/crypto/symbol?exchange=binance&token=${apiKey}`).then(
-            (response) => response.json()
-          )
+          fetch(
+            `${url}/crypto/symbol=${symbol}?exchange=binance&token=${apiKey}`
+          ).then((response) => response.json())
         );
 
         const resolvedData = await Promise.all(promises);
