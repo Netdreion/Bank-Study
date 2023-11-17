@@ -10,6 +10,8 @@ const Investing = () => {
   const symbols = ["AAPL", "MSFT", "AMZN"];
   const cryptoSymbols = ["ETH/BTC", "LTC/BTC", "BNB/BTC"];
 
+  // ...
+
   useEffect(() => {
     const fetchCryptoData = async () => {
       try {
@@ -20,7 +22,15 @@ const Investing = () => {
         );
 
         const resolvedData = await Promise.all(promises);
-        setReceivedCryptoData(resolvedData);
+        console.log("Crypto Data:", resolvedData);
+
+        // Extract relevant data from the resolved promises
+        const data = resolvedData.map((crypto) => ({
+          c: crypto.c, // Current price
+          d: crypto.d, // Daily change
+        }));
+
+        setReceivedCryptoData(data);
       } catch (error) {
         console.error(error);
       }
@@ -28,6 +38,8 @@ const Investing = () => {
 
     fetchCryptoData();
   }, []);
+
+  // ...
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,8 +118,6 @@ const Investing = () => {
                   <td>{crypto.c}</td>{" "}
                   {/* Update property name based on API response */}
                   <td>{crypto.d}</td>{" "}
-                  {/* Update property name based on API response */}
-                  {/* Add other crypto columns as needed */}
                 </tr>
               ))}
             </tbody>
