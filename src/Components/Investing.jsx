@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; //  Finnhub API Key
+const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; // Finnhub API Key
 const url = "https://finnhub.io/api/v1";
 
 const Investing = () => {
@@ -11,25 +11,22 @@ const Investing = () => {
   const cryptoSymbols = ["ETH/BTC", "LTC/BTC", "BNB/BTC"];
 
   useEffect(() => {
-    const fetchCrytoData = async () => {
+    const fetchCryptoData = async () => {
       try {
         const promises = cryptoSymbols.map((symbol) =>
           fetch(
-            `${url}/crypto/symbol=${symbol}?exchange=binance&token=${apiKey}`
+            `${url}/quote?symbol=${symbol}&exchange=binance&token=${apiKey}`
           ).then((response) => response.json())
         );
 
         const resolvedData = await Promise.all(promises);
-
-        // Extract the 'result' array from each resolved promise
-        const data = resolvedData.map((promise) => promise.result);
-
-        setReceivedCryptoData(data);
+        setReceivedCryptoData(resolvedData);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchCrytoData();
+
+    fetchCryptoData();
   }, []);
 
   useEffect(() => {
@@ -41,8 +38,8 @@ const Investing = () => {
           )
         );
 
-        const data = await Promise.all(promises);
-        setReceivedStockData(data);
+        const resolvedData = await Promise.all(promises);
+        setReceivedStockData(resolvedData);
       } catch (error) {
         console.error(error);
       }
@@ -58,7 +55,7 @@ const Investing = () => {
           setShow(!show);
         }}
       >
-        {!show ? "Investing" : "close Investing"}
+        {!show ? "Investing" : "Close Investing"}
       </button>
 
       {show && receivedStockData && (
@@ -72,7 +69,7 @@ const Investing = () => {
                 <th>% Change</th>
                 <th>Highest Price</th>
                 <th>Lowest Price</th>
-                <th>previous day</th>
+                <th>Previous Day</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +82,6 @@ const Investing = () => {
                   <td>{stock.h}</td>
                   <td>{stock.l}</td>
                   <td>{stock.pc}</td>
-                  <td></td>
                 </tr>
               ))}
             </tbody>
@@ -97,23 +93,21 @@ const Investing = () => {
           <table>
             <thead>
               <tr>
-                <th>Stock</th>
+                <th>Crypto</th>
                 <th>Price</th>
                 <th>Daily Change</th>
-                <th>% Change</th>
-                <th>Highest Price</th>
-                <th>Lowest Price</th>
-                <th>previous day</th>
+                {/* Add other crypto columns as needed */}
               </tr>
             </thead>
             <tbody>
               {receivedCryptoData.map((crypto, index) => (
                 <tr key={index}>
-                  <td>{symbols[index]}</td>
-                  <td>{crypto.c}</td>
-                  <td>{crypto.d}</td>
-
-                  <td></td>
+                  <td>{cryptoSymbols[index]}</td>
+                  <td>{crypto.c}</td>{" "}
+                  {/* Update property name based on API response */}
+                  <td>{crypto.d}</td>{" "}
+                  {/* Update property name based on API response */}
+                  {/* Add other crypto columns as needed */}
                 </tr>
               ))}
             </tbody>
