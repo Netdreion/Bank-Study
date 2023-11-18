@@ -1,57 +1,51 @@
 import React, { useEffect, useState } from "react";
 
-const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg"; // Finnhub API Key
+const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
+const exchange = "binance";
 
 const Investing = () => {
   const [receivedStockData, setReceivedStockData] = useState(null);
   const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
   const symbols = ["AAPL", "MSFT", "AMZN"];
-  const cryptoSymbols = ["ETH/BTC", "LTC/BTC", "BNB/BTC"];
-
-  // ...
-
-  useEffect(() => {
-    const fetchCryptoData = async () => {
-      try {
-        const promises = cryptoSymbols.map((symbol) =>
-          fetch(
-            `${url}/quote?symbol=${symbol}&exchange=binance&token=${apiKey}`
-          ).then((response) => response.json())
-        );
-
-        const resolvedData = await Promise.all(promises);
-        console.log("Crypto Data:", resolvedData);
-
-        // Extract relevant data from the resolved promises
-        const data = resolvedData.map((crypto) => ({
-          c: crypto.c, // Current price
-          d: crypto.d, // Daily change
-        }));
-
-        setReceivedCryptoData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchCryptoData();
-  }, []);
-
-  // ...
+  const cryptoSymbolsEndpoint = `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const promises = symbols.map((symbol) =>
+        // Fetch stock data
+        const stockPromises = symbols.map((symbol) =>
           fetch(`${url}/quote?symbol=${symbol}&token=${apiKey}`).then(
             (response) => response.json()
           )
         );
 
-        const resolvedData = await Promise.all(promises);
-        setReceivedStockData(resolvedData);
+        const stockResolvedData = await Promise.all(stockPromises);
+        setReceivedStockData(stockResolvedData);
+
+        // Fetch crypto symbols
+        const response = await fetch(cryptoSymbolsEndpoint);
+        const cryptoSymbolsData = await response.json();
+        console.log("Crypto Symbols Response:", cryptoSymbolsData);
+
+        // Use crypto symbols to fetch crypto data
+        const cryptoPromises = cryptoSymbolsData.map((symbolData) =>
+          fetch(
+            `${url}/quote?symbol=${symbolData.symbol}&exchange=${exchange}&token=${apiKey}`
+          ).then((response) => response.json())
+        );
+
+        const cryptoResolvedData = await Promise.all(cryptoPromises);
+        console.log("Crypto API Response:", cryptoResolvedData);
+
+        // Extract relevant data from the resolved promises
+        const cryptoData = cryptoResolvedData.map((crypto) => ({
+          c: crypto.c, // Current price
+          d: crypto.d, // Daily change
+        }));
+
+        setReceivedCryptoData(cryptoData);
       } catch (error) {
         console.error(error);
       }
@@ -100,6 +94,7 @@ const Investing = () => {
           </table>
         </div>
       )}
+
       {show && receivedCryptoData && (
         <div className="table-container">
           <table>
@@ -115,9 +110,8 @@ const Investing = () => {
               {receivedCryptoData.map((crypto, index) => (
                 <tr key={index}>
                   <td>{cryptoSymbols[index]}</td>
-                  <td>{crypto.c}</td>{" "}
-                  {/* Update property name based on API response */}
-                  <td>{crypto.d}</td>{" "}
+                  <td>{crypto.c}</td>
+                  <td>{crypto.d}</td>
                 </tr>
               ))}
             </tbody>
