@@ -10,6 +10,7 @@ const Investing = () => {
   const [show, setShow] = useState(false);
   const symbols = ["AAPL", "MSFT", "AMZN"];
   const cryptoSymbolsEndpoint = `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`;
+  const cryptoSymbols = ["ETHBTC", "BINANCE:LTCBTC", "BINANCE:BNBBTC"];
 
   useEffect(() => {
     const fetchData = async () => {
