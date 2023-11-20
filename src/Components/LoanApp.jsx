@@ -3,59 +3,101 @@ import { useState } from "react";
 const LoanPage = () => {
   const [formData, setFormData] = useState({
     name: "",
-    adress: "",
+    address: "", // Corrected the spelling of "address"
     income: "",
     debt: "",
-    name: "",
     loanAmount: "",
   });
   const [collectFormData, setCollectFormData] = useState([]);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    setCollectFormData([...collectFormData, { ...formData }]);
+    setFormData({
+      name: "",
+      address: "",
+      income: "",
+      debt: "",
+      loanAmount: "",
+    });
+  };
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleClick = () => {};
-  setCollectFormData([...collectFormData, { ...formData }]);
   return (
     <div>
-      <h1>Loan Aplication</h1>
-      <h4>Fillt out to Form to Aplly</h4>
+      <h1>Loan Application</h1>
+      <h4>Fill out the Form to Apply</h4>
       <div>
         <form onSubmit={handleSubmit}>
-          <input value={formData.name} name="name" placeholder="name here">
-            {" "}
-            name
-          </input>
-          <input
-            value={formData.adress}
-            name="adress"
-            placeholder="adress here"
-          >
-            adress
-          </input>
-          <input
-            value={formData.income}
-            name="income"
-            placeholder="income here"
-          >
-            income
-          </input>
-          <input value={formData.debt} name="debt" placeholder="debt here">
-            total debt
-          </input>
-          <input
-            value={formData.loanAmount}
-            name="name"
-            placeholder="Loan Amount here"
-          >
-            Loan Amount
-          </input>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={formData.name}
+              name="name"
+              onChange={handleInputChange}
+              placeholder="Enter your name here"
+            />
+          </label>
+          <label>
+            Address:
+            <input
+              type="text"
+              value={formData.address}
+              name="address"
+              onChange={handleInputChange}
+              placeholder="Enter your address here"
+            />
+          </label>
+          <label>
+            Income:
+            <input
+              type="text"
+              value={formData.income}
+              name="income"
+              onChange={handleInputChange}
+              placeholder="Enter your income here"
+            />
+          </label>
+          <label>
+            Total Debt:
+            <input
+              type="text"
+              value={formData.debt}
+              name="debt"
+              onChange={handleInputChange}
+              placeholder="Enter your total debt here"
+            />
+          </label>
+          <label>
+            Loan Amount:
+            <input
+              type="text"
+              value={formData.loanAmount}
+              name="loanAmount"
+              onChange={handleInputChange}
+              placeholder="Enter your loan amount here"
+            />
+          </label>
+          <button type="submit">Submit</button>
         </form>
-        <button onClick={handleClick}>submit</button>
+      </div>
+      <div>
+        <ul>
+          {collectFormData.map((data, index) => (
+            <li key={index}>
+              Name: {data.name}, Address: {data.address}, Income: {data.income},
+              Debt: {data.debt}, Loan Amount: {data.loanAmount}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 };
+
 export default LoanPage;
