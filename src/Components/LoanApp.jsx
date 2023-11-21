@@ -21,6 +21,7 @@ const LoanPage = () => {
       loanAmount: "",
     });
   };
+  const [show, setShow] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,63 +30,68 @@ const LoanPage = () => {
 
   return (
     <div>
-      <h1>Loan Application</h1>
-      <h4>Fill out the Form to Apply</h4>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={formData.name}
-              name="name"
-              onChange={handleInputChange}
-              placeholder="Enter your name here"
-            />
-          </label>
-          <label>
-            Address:
-            <input
-              type="text"
-              value={formData.address}
-              name="address"
-              onChange={handleInputChange}
-              placeholder="Enter your address here"
-            />
-          </label>
-          <label>
-            Income:
-            <input
-              type="text"
-              value={formData.income}
-              name="income"
-              onChange={handleInputChange}
-              placeholder="Enter your income here"
-            />
-          </label>
-          <label>
-            Total Debt:
-            <input
-              type="text"
-              value={formData.debt}
-              name="debt"
-              onChange={handleInputChange}
-              placeholder="Enter your total debt here"
-            />
-          </label>
-          <label>
-            Loan Amount:
-            <input
-              type="text"
-              value={formData.loanAmount}
-              name="loanAmount"
-              onChange={handleInputChange}
-              placeholder="Enter your loan amount here"
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      <button onClick={() => setShow(!show)}>
+        {!show ? "Loan Application" : "close Loan Application"}
+      </button>
+      {show && (
+        <div>
+          <h4>Fill out the Form to Apply</h4>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Name:
+              <input
+                type="text"
+                value={formData.name}
+                name="name"
+                onChange={handleInputChange}
+                placeholder="Enter your name here"
+              />
+            </label>
+            <label>
+              Address:
+              <input
+                type="text"
+                value={formData.address}
+                name="address"
+                onChange={handleInputChange}
+                placeholder="Enter your address here"
+              />
+            </label>
+            <label>
+              Income:
+              <input
+                type="text"
+                value={formData.income}
+                name="income"
+                onChange={handleInputChange}
+                placeholder="Enter your income here"
+              />
+            </label>
+            <label>
+              Total Debt:
+              <input
+                type="text"
+                value={formData.debt}
+                name="debt"
+                onChange={handleInputChange}
+                placeholder="Enter your total debt here"
+              />
+            </label>
+            <label>
+              Loan Amount:
+              <input
+                type="text"
+                value={formData.loanAmount}
+                name="loanAmount"
+                onChange={handleInputChange}
+                placeholder="Enter your loan amount here"
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      )}
+
       <div>
         <ul>
           {collectFormData.map((data, index) => (
@@ -95,6 +101,7 @@ const LoanPage = () => {
             </li>
           ))}
         </ul>
+        <button onClick={() => setCollectFormData([])}>clear</button>
       </div>
     </div>
   );
