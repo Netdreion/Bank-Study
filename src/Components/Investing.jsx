@@ -24,29 +24,6 @@ const Investing = () => {
 
         const stockResolvedData = await Promise.all(stockPromises);
         setReceivedStockData(stockResolvedData);
-
-        // Fetch crypto symbols
-        const response = await fetch(cryptoSymbolsEndpoint);
-        const cryptoSymbolsData = await response.json();
-        console.log("Crypto Symbols Response:", cryptoSymbolsData);
-
-        // Use crypto symbols to fetch crypto data
-        const cryptoPromises = cryptoSymbolsData.map((symbolData) =>
-          fetch(
-            `${url}/quote?symbol=${symbolData.symbol}&exchange=${exchange}&token=${apiKey}`
-          ).then((response) => response.json())
-        );
-
-        const cryptoResolvedData = await Promise.all(cryptoPromises);
-        console.log("Crypto API Response:", cryptoResolvedData);
-
-        // Extract relevant data from the resolved promises
-        const cryptoData = cryptoResolvedData.map((crypto) => ({
-          c: crypto.c, // Current price
-          d: crypto.d, // Daily change
-        }));
-
-        setReceivedCryptoData(cryptoData);
       } catch (error) {
         console.error(error);
       }
