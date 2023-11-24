@@ -3,12 +3,14 @@ import { useState } from "react";
 const LoanPage = () => {
   const [formData, setFormData] = useState({
     name: "",
-    address: "", // Corrected the spelling of "address"
-    income: "",
-    debt: "",
-    loanAmount: "",
+    address: "",
+    income: null,
+    debt: null,
+    loanAmount: null,
   });
   const [collectFormData, setCollectFormData] = useState([]);
+  const [decision, setDesicion] = useState("");
+  const [show, setShow] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,13 +23,18 @@ const LoanPage = () => {
       loanAmount: "",
     });
   };
-  const [show, setShow] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleDecision = () => {
+    const { income, debt } = formData;
+    const loanDesicion = income - debt;
+    const finalDecision = loanDesicion / 3;
+    setDesicion(finalDecision);
+  };
   return (
     <div>
       <button onClick={() => setShow(!show)}>
@@ -98,6 +105,12 @@ const LoanPage = () => {
             <li key={index}>
               Name: {data.name}, Address: {data.address}, Income: {data.income},
               Debt: {data.debt}, Loan Amount: {data.loanAmount}
+              {setDesicion()}
+              {decision <= data.loanAmount ? (
+                <div>granted</div>
+              ) : (
+                <div>denied</div>
+              )}
             </li>
           ))}
         </ul>
