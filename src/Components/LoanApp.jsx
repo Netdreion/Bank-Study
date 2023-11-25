@@ -9,8 +9,14 @@ const LoanPage = () => {
     loanAmount: null,
   });
   const [collectFormData, setCollectFormData] = useState([]);
-  const [decision, setDesicion] = useState("");
+  const [decision, setDecision] = useState(null);
+
   const [show, setShow] = useState(false);
+  const handleDecision = () => {
+    const formula = (formData.income - formData.debt) / 3;
+
+    setDecision(formula);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,19 +28,15 @@ const LoanPage = () => {
       debt: "",
       loanAmount: "",
     });
+    handleDecision;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const numericValue = value === "" ? "" : parseFloat(value);
+    setFormData({ ...formData, [name]: numericValue });
   };
 
-  const handleDecision = () => {
-    const { income, debt } = formData;
-    const loanDesicion = income - debt;
-    const finalDecision = loanDesicion / 3;
-    setDesicion(finalDecision);
-  };
   return (
     <div>
       <button onClick={() => setShow(!show)}>
@@ -105,7 +107,6 @@ const LoanPage = () => {
             <li key={index}>
               Name: {data.name}, Address: {data.address}, Income: {data.income},
               Debt: {data.debt}, Loan Amount: {data.loanAmount}
-              {setDesicion()}
               {decision <= data.loanAmount ? (
                 <div>granted</div>
               ) : (
