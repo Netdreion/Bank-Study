@@ -9,14 +9,9 @@ const LoanPage = () => {
     loanAmount: null,
   });
   const [collectFormData, setCollectFormData] = useState([]);
-  const [decision, setDecision] = useState(null);
+  const [decision, setDecision] = useState(0);
 
   const [show, setShow] = useState(false);
-  const handleDecision = () => {
-    const formula = (formData.income - formData.debt) / 3;
-
-    setDecision(formula);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,16 +19,22 @@ const LoanPage = () => {
     setFormData({
       name: "",
       address: "",
-      income: "",
-      debt: "",
-      loanAmount: "",
+      income: null, // Set back to null to avoid potential type issues
+      debt: null,
+      loanAmount: null,
     });
-    handleDecision;
+    handleDecision(); // Call the function
+  };
+
+  const handleDecision = () => {
+    const formula = (formData.income - formData.debt) / 3;
+
+    setDecision(formula);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const numericValue = value === "" ? "" : parseFloat(value);
+    const numericValue = value === "" ? null : parseFloat(value); // Change to null if the input is empty
     setFormData({ ...formData, [name]: numericValue });
   };
 
@@ -69,7 +70,6 @@ const LoanPage = () => {
             <label>
               Income:
               <input
-                type="text"
                 value={formData.income}
                 name="income"
                 onChange={handleInputChange}
@@ -79,7 +79,6 @@ const LoanPage = () => {
             <label>
               Total Debt:
               <input
-                type="text"
                 value={formData.debt}
                 name="debt"
                 onChange={handleInputChange}
@@ -89,7 +88,6 @@ const LoanPage = () => {
             <label>
               Loan Amount:
               <input
-                type="text"
                 value={formData.loanAmount}
                 name="loanAmount"
                 onChange={handleInputChange}
@@ -107,7 +105,7 @@ const LoanPage = () => {
             <li key={index}>
               Name: {data.name}, Address: {data.address}, Income: {data.income},
               Debt: {data.debt}, Loan Amount: {data.loanAmount}
-              {decision <= data.loanAmount ? (
+              {formData.loanAmount > decision ? (
                 <div>granted</div>
               ) : (
                 <div>denied</div>
