@@ -114,16 +114,16 @@ const LoanPage = () => {
           ))}
         </ul>
         <button
-          onClick={() =>
-            setFormData((prev) => ({
-              ...prev,
+          onClick={() => {
+            setCollectFormData([]);
+            setFormData({
               name: "",
               address: "",
               income: null,
               debt: null,
               loanAmount: null,
-            }))
-          }
+            });
+          }}
         >
           Clear
         </button>
