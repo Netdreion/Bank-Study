@@ -19,11 +19,11 @@ const LoanPage = () => {
     setFormData({
       name: "",
       address: "",
-      income: null, // Set back to null to avoid potential type issues
+      income: null,
       debt: null,
       loanAmount: null,
     });
-    handleDecision(); // Call the function
+    handleDecision();
   };
 
   const handleDecision = () => {
@@ -105,14 +105,16 @@ const LoanPage = () => {
             <li key={index}>
               Name: {data.name}, Address: {data.address}, Income: {data.income},
               Debt: {data.debt}, Loan Amount: {data.loanAmount}
-              {formData.loanAmount > decision ? (
-                <div>granted</div>
-              ) : (
-                <div>denied</div>
-              )}
             </li>
           ))}
         </ul>
+        <div>
+          {formData.loanAmount > decision ? (
+            <div>granted</div>
+          ) : (
+            <div>denied</div>
+          )}
+        </div>
         <button
           onClick={() => {
             setCollectFormData([]);
