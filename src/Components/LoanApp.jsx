@@ -4,14 +4,20 @@ const LoanPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
-    income: null,
-    debt: null,
-    loanAmount: null,
+    income: 0,
+    debt: 0,
+    loanAmount: 0,
   });
   const [collectFormData, setCollectFormData] = useState([]);
   const [decision, setDecision] = useState(0);
 
   const [show, setShow] = useState(false);
+
+  const handleDecision = () => {
+    const formula = (formData.income - formData.debt) / 3;
+
+    setDecision(formula);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,15 +32,9 @@ const LoanPage = () => {
     handleDecision();
   };
 
-  const handleDecision = () => {
-    const formula = (formData.income - formData.debt) / 3;
-
-    setDecision(formula);
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const numericValue = value === "" ? null : parseFloat(value); // Change to null if the input is empty
+    const numericValue = value === "" ? null : parseFloat(value); 
     setFormData({ ...formData, [name]: numericValue });
   };
 
