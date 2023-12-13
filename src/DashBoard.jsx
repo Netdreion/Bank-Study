@@ -7,6 +7,7 @@ import TransactionHistory from "./Components/TransactionHistory.jsx";
 import data from "./Components/Data.jsx";
 import Investing from "./Components/Investing";
 import LoanPage from "./Components/LoanApp";
+import Review from "./Components/Review";
 
 const DashBoard = () => {
   const userSetup = {
@@ -136,6 +137,7 @@ const DashBoard = () => {
           </div>
         )}
       </div>
+      {show.loggedInShow && <Review />}
     </div>
   );
 };

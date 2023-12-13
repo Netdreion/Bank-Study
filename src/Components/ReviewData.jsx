@@ -1,4 +1,4 @@
-const data = [
+const people = [
   { id: 1, name: "John Doe", review: "Great product! I love it." },
   {
     id: 2,
@@ -14,4 +14,4 @@ const data = [
   { id: 5, name: "Charlie Brown", review: "Easy to use and efficient." },
 ];
 
-export default data;
+export default people;
