@@ -5,19 +5,37 @@ const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, review } = people[index];
 
+  const nextBtn = () => {
+    if (index < 4) {
+      setIndex((prev) => prev + 1);
+    } else {
+      setIndex(index);
+    }
+  };
+
+  const prevBtn = () => {
+    if (index !== 0) {
+      setIndex((prev) => prev - 1);
+    } else {
+      setIndex(index);
+    }
+  };
+
+  const randomBtn = () => {
+    const random = Math.floor(Math.random() * people.length);
+    setIndex(random);
+  };
+
   return (
     <div>
+      <h2>Reviews</h2>
       <section>
         <h2>{name}</h2>
         <p>{review}</p>
       </section>
-      <button onClick={() => setIndex((prev) => prev + 1)}>next</button>
-      <button onClick={() => setIndex((prev) => prev - 1)}>prev</button>
-      <button
-        onClick={() => setIndex(Math.random(Math.floor() * people.lenghth))}
-      >
-        random
-      </button>
+      <button onClick={() => nextBtn()}>next</button>
+      <button onClick={() => prevBtn()}>prev</button>
+      <button onClick={() => randomBtn()}>random</button>
     </div>
   );
 };
