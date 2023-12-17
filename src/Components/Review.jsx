@@ -29,7 +29,7 @@ const Review = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       randomBtn();
-    }, [5000]);
+    }, [3000]);
 
     return () => clearInterval(timer);
   }, [people, index]);
