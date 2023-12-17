@@ -28,11 +28,11 @@ const Review = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      nextBtn();
+      randomBtn();
     }, [5000]);
 
     return () => clearInterval(timer);
-  }, [index]);
+  }, [people, index]);
 
   return (
     <div>
