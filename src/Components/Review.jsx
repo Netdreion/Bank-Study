@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import people from "./ReviewData";
 
 const Review = () => {
@@ -25,6 +25,14 @@ const Review = () => {
     const random = Math.floor(Math.random() * people.length);
     setIndex(random);
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextBtn();
+    }, [5000]);
+
+    return () => clearInterval(timer);
+  }, [index]);
 
   return (
     <div>
