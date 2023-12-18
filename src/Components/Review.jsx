@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 const Review = () => {
   const [index, setIndex] = useState(0);
-  const { name, review } = people[index];
+  const { name, review, star } = people[index];
 
   const nextBtn = () => {
     if (index < 4) {
@@ -40,7 +40,14 @@ const Review = () => {
       <h2>Reviews</h2>
       <section>
         <h2>{name}</h2>
-        <p>{review}</p>
+
+        <span>
+          <p>
+            {star}
+            <FaStar />
+          </p>
+          <p>{review}</p>
+        </span>
       </section>
       <button onClick={() => nextBtn()}>next</button>
       <button onClick={() => prevBtn()}>prev</button>
