@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import people from "./ReviewData";
+import { FaStar } from "react-icons/fa";
 
 const Review = () => {
   const [index, setIndex] = useState(0);
