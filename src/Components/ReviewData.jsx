@@ -25,6 +25,7 @@ const people = [
     star: "5",
   },
   { id: 6, name: "chuck Berry", review: "it sucks ", star: "0" },
+  { id: 7, name: "gail Berry", review: "it ok ", star: "1" },
 ];
 
 export default people;
