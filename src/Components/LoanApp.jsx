@@ -37,8 +37,8 @@ const LoanPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const numericValue = value === "" ? null : parseFloat(value);
-    setFormData({ ...formData, [name]: numericValue });
+
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -118,9 +118,9 @@ const LoanPage = () => {
             setFormData({
               name: "",
               address: "",
-              income: null,
-              debt: null,
-              loanAmount: null,
+              income: 0,
+              debt: 0,
+              loanAmount: 0,
             });
           }}
         >
