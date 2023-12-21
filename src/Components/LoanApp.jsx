@@ -13,13 +13,8 @@ const LoanPage = () => {
 
   const [show, setShow] = useState(false);
 
-  const handleDecision = (decision) => {
-    const formula = (formData.income - formData.debt) / 3;
-
-    {
-      formData.loanAmount > decision ? "granted" : "denied";
-    }
-    setDecision(formula);
+  const handleDecision = () => {
+    setDecision((formData.income - formData.debt) / 3);
   };
 
   const handleSubmit = (e) => {
@@ -32,6 +27,7 @@ const LoanPage = () => {
       debt: null,
       loanAmount: null,
     });
+
     handleDecision();
   };
 
@@ -111,7 +107,10 @@ const LoanPage = () => {
             </li>
           ))}
         </ul>
-        <div>{decision < formData.loanAmount ? "granted" : "denied"}</div>
+        {show && (
+          <div>{decision > formData.loanAmount ? "granted" : "denied"}</div>
+        )}
+
         <button
           onClick={() => {
             setCollectFormData([]);
