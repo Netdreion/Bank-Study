@@ -5,6 +5,8 @@ import { FaStar } from "react-icons/fa";
 const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, review, star } = people[index];
+  const [addReview, setAddReview] = useState("");
+  const [reviewList, setReviewList] = useState([]);
 
   const nextBtn = () => {
     if (index < 4) {
@@ -35,6 +37,14 @@ const Review = () => {
     return () => clearInterval(timer);
   }, [people, index]);
 
+  const handleChange = (e) => {
+    setAddReview(e.target.value);
+    setAddReview("");
+  };
+  const handleClick = () => {
+    setReviewList([...reviewList, review]);
+  };
+
   return (
     <div>
       <h2>Reviews</h2>
@@ -52,6 +62,21 @@ const Review = () => {
       <button onClick={() => nextBtn()}>next</button>
       <button onClick={() => prevBtn()}>prev</button>
       <button onClick={() => randomBtn()}>random</button>
+
+      <div>
+        <h4>add review</h4>
+
+        <section>
+          <input
+            value={addReview}
+            placeholder="add review"
+            onChange={handleChange}
+          ></input>
+          <article>
+            <p></p>
+          </article>
+        </section>
+      </div>
     </div>
   );
 };

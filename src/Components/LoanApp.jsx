@@ -29,6 +29,7 @@ const LoanPage = () => {
     });
 
     handleDecision();
+    setDecision("");
   };
 
   const handleInputChange = (e) => {
