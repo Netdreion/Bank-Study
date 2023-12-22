@@ -8,6 +8,13 @@ const Review = () => {
   const [addReview, setAddReview] = useState("");
   const [reviewList, setReviewList] = useState([]);
 
+  const handleChange = (e) => {
+    setAddReview(e.target.value);
+  };
+  const handleClick = () => {
+    setReviewList([...reviewList, addReview]);
+  };
+
   const nextBtn = () => {
     if (index < 4) {
       setIndex((prev) => prev + 1);
@@ -37,14 +44,6 @@ const Review = () => {
     return () => clearInterval(timer);
   }, [people, index]);
 
-  const handleChange = (e) => {
-    setAddReview(e.target.value);
-    setAddReview("");
-  };
-  const handleClick = () => {
-    setReviewList([...reviewList, review]);
-  };
-
   return (
     <div>
       <h2>Reviews</h2>
@@ -68,12 +67,16 @@ const Review = () => {
 
         <section>
           <input
+            type="text"
             value={addReview}
             placeholder="add review"
             onChange={handleChange}
           ></input>
+          <button onClick={handleClick}>add</button>
           <article>
-            <p></p>
+            {reviewList.map((item, reviewIndex) => {
+              return <p key={reviewIndex}>{item}</p>;
+            })}
           </article>
         </section>
       </div>
