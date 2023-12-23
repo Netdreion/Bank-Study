@@ -8,13 +8,6 @@ const Review = () => {
   const [addReview, setAddReview] = useState("");
   const [reviewList, setReviewList] = useState([]);
 
-  const handleChange = (e) => {
-    setAddReview(e.target.value);
-  };
-  const handleClick = () => {
-    setReviewList([...reviewList, addReview]);
-  };
-
   const nextBtn = () => {
     if (index < 4) {
       setIndex((prev) => prev + 1);
@@ -43,6 +36,18 @@ const Review = () => {
 
     return () => clearInterval(timer);
   }, [people, index]);
+
+  const handleChange = (e) => {
+    setAddReview(e.target.value);
+  };
+  const handleClick = () => {
+    setReviewList([...reviewList, addReview]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(reviewList));
+    return reviewList;
+  }, [reviewList]);
 
   return (
     <div>
@@ -78,6 +83,7 @@ const Review = () => {
               return <p key={reviewIndex}>{item}</p>;
             })}
           </article>
+          <button onClick={() => setReviewList([])}>clear</button>
         </section>
       </div>
     </div>
