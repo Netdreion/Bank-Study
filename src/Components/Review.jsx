@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import people from "./ReviewData";
 import { FaStar } from "react-icons/fa";
 
+const storageSetUp = () => {
+  const setUp = JSON.parse(localStorage.getItem("list")) || [];
+
+  return setUp;
+};
+
 const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, review, star } = people[index];
   const [addReview, setAddReview] = useState("");
-  const [reviewList, setReviewList] = useState([]);
+  const [reviewList, setReviewList] = useState([storageSetUp]);
 
   const nextBtn = () => {
     if (index < 4) {
@@ -46,7 +52,6 @@ const Review = () => {
 
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(reviewList));
-    return reviewList;
   }, [reviewList]);
 
   return (
