@@ -75,21 +75,25 @@ const Review = () => {
       <div>
         <h4>add review</h4>
 
-        <section>
-          <input
-            type="text"
-            value={addReview}
-            placeholder="add review"
-            onChange={handleChange}
-          ></input>
-          <button onClick={handleClick}>add</button>
-          <article>
-            {reviewList.map((item, reviewIndex) => {
-              return <p key={reviewIndex}>{item}</p>;
-            })}
-          </article>
-          <button onClick={() => setReviewList([])}>clear</button>
-        </section>
+        <form>
+          <section>
+            <input
+              type="text"
+              value={addReview}
+              placeholder="add review"
+              onChange={handleChange}
+            ></input>
+            <input>name</input>
+            <input type="number">star</input>
+            <button onClick={handleClick}>add</button>
+            <article>
+              {reviewList.map((item, reviewIndex) => {
+                return <p key={reviewIndex}>{item}</p>;
+              })}
+            </article>
+            <button onClick={() => setReviewList([])}>clear</button>
+          </section>
+        </form>
       </div>
     </div>
   );
