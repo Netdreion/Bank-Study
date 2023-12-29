@@ -39,7 +39,7 @@ const Review = () => {
   return (
     <div>
       <button onClick={() => setShow(!show)}>
-        <h2> {show ? "Reviews" : "close Reviews"}</h2>
+        <h2> {!show ? "Reviews" : "close Reviews"}</h2>
       </button>
 
       {show && (
