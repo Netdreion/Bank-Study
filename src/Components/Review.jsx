@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa";
 const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, review, star } = people[index];
+  const [show, setShow] = useState(false);
 
   const nextBtn = () => {
     if (index < 4) {
@@ -37,21 +38,28 @@ const Review = () => {
 
   return (
     <div>
-      <h2>Reviews</h2>
-      <section>
-        <h2>{name}</h2>
+      <button onClick={() => setShow(!show)}>
+        <h2>Reviews</h2>
+      </button>
 
-        <span>
-          <p>
-            {star}
-            <FaStar />
-          </p>
-          <p>{review}</p>
-        </span>
-      </section>
-      <button onClick={() => nextBtn()}>next</button>
-      <button onClick={() => prevBtn()}>prev</button>
-      <button onClick={() => randomBtn()}>random</button>
+      {show && (
+        <div>
+          <section>
+            <h2>{name}</h2>
+
+            <span>
+              <p>
+                {star}
+                <FaStar />
+              </p>
+              <p>{review}</p>
+            </span>
+          </section>
+          <button onClick={() => nextBtn()}>next</button>
+          <button onClick={() => prevBtn()}>prev</button>
+          <button onClick={() => randomBtn()}>random</button>
+        </div>
+      )}
     </div>
   );
 };
