@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LoanPage = () => {
   const [formData, setFormData] = useState({
@@ -14,12 +14,20 @@ const LoanPage = () => {
   const [show, setShow] = useState(false);
 
   const handleDecision = () => {
-    setDecision((formData.income - formData.debt) / 3);
+    const handleDecision = formData.income - formData.debt / 3;
+    if (handleDecision > formData.loanAmount) {
+      return setDecision("denied");
+    } else {
+      return setDecision("granted");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setCollectFormData([...collectFormData, { ...formData }]);
+
+    handleDecision();
+    setDecision("");
     setFormData({
       name: "",
       address: "",
@@ -27,9 +35,6 @@ const LoanPage = () => {
       debt: null,
       loanAmount: null,
     });
-
-    handleDecision();
-    setDecision("");
   };
 
   const handleInputChange = (e) => {
@@ -108,9 +113,7 @@ const LoanPage = () => {
             </li>
           ))}
         </ul>
-        {show && (
-          <div>{decision > formData.loanAmount ? "granted" : "denied"}</div>
-        )}
+        <div>{show && <div>{decision}</div>}</div>
 
         <button
           onClick={() => {
