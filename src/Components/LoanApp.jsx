@@ -14,8 +14,16 @@ const LoanPage = () => {
   const [show, setShow] = useState(false);
 
   const handleDecision = () => {
-    const formula = formData.income - formData.debt / 3;
-    setDecision(formula);
+    const { income, debt, loanAmount } = formData;
+
+    // Check if any of the required values is null
+    if (income === null || debt === null || loanAmount === null) {
+      setDecision("Incomplete information");
+      return;
+    }
+
+    const formula = income - debt / 3;
+    setDecision(formula > loanAmount ? "granted" : "denied");
   };
 
   const handleSubmit = (e) => {
@@ -109,11 +117,7 @@ const LoanPage = () => {
             </li>
           ))}
         </ul>
-        <div>
-          {show && (
-            <div>{decision > formData.loanAmount ? "denied" : "granted"} </div>
-          )}
-        </div>
+        <div>{show && <div>{decision} </div>}</div>
 
         <button
           onClick={() => {
