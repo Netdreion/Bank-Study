@@ -4,41 +4,44 @@ const LoanPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
-    income: null,
-    debt: null,
-    loanAmount: null,
+    income: 0,
+    debt: 0,
+    loanAmount: 0,
   });
   const [collectFormData, setCollectFormData] = useState([]);
   const [decision, setDecision] = useState("");
 
   const [show, setShow] = useState(false);
 
-  const handleDecision = () => {
-    const { income, debt, loanAmount } = formData;
-
-    // Check if any of the required values is null
-    if (income === null || debt === null || loanAmount === null) {
-      setDecision("Incomplete information");
-      return;
-    }
-
-    const formula = income - debt / 3;
-    setDecision(formula > loanAmount ? "granted" : "denied");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setCollectFormData([...collectFormData, { ...formData }]);
 
-    handleDecision();
-    setDecision("");
     setFormData({
       name: "",
       address: "",
-      income: null,
-      debt: null,
-      loanAmount: null,
+      income: 0,
+      debt: 0,
+      loanAmount: 0,
     });
+  };
+  useEffect(() => {
+    handleDecision();
+  }, [handleSubmit]);
+
+  const handleDecision = () => {
+    const { income, debt, loanAmount } = formData;
+
+    // Check if any of the required values is null
+    if (income === 0 || debt === 0 || loanAmount === 0) {
+      setDecision("Incomplete information");
+      return;
+    }
+
+    const formula = (income - debt) / 3;
+    console.log("Formula:", formula, "Loan Amount:", loanAmount);
+    setDecision(formula);
+    console.log(`this is decison${decision}`);
   };
 
   const handleInputChange = (e) => {
@@ -81,6 +84,7 @@ const LoanPage = () => {
               <input
                 value={formData.income}
                 name="income"
+                type="number"
                 onChange={handleInputChange}
                 placeholder="Enter your income here"
               />
@@ -90,6 +94,7 @@ const LoanPage = () => {
               <input
                 value={formData.debt}
                 name="debt"
+                type="number"
                 onChange={handleInputChange}
                 placeholder="Enter your total debt here"
               />
@@ -99,6 +104,7 @@ const LoanPage = () => {
               <input
                 value={formData.loanAmount}
                 name="loanAmount"
+                type="number"
                 onChange={handleInputChange}
                 placeholder="Enter your loan amount here"
               />
@@ -110,14 +116,22 @@ const LoanPage = () => {
 
       <div>
         <ul>
-          {collectFormData.map((data, index) => (
-            <li key={index}>
-              Name: {data.name}, Address: {data.address}, Income: {data.income},
-              Debt: {data.debt}, Loan Amount: {data.loanAmount}
-            </li>
-          ))}
+          {collectFormData.map((data, index) => {
+            const { name, address, income, debt, loanAmount } = data;
+
+            return (
+              <li key={index}>
+                Name: {name}, Address: {address}, Income: {income}, Debt: {debt}
+                , Loan Amount: {loanAmount}
+                <div>
+                  <div>
+                    {decision <= formData.loanAmount ? "granted" : "denied"}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
-        <div>{show && <div>{decision} </div>}</div>
 
         <button
           onClick={() => {
