@@ -9,7 +9,8 @@ const LoanPage = () => {
     loanAmount: 0,
   });
   const [collectFormData, setCollectFormData] = useState([]);
-  const [decision, setDecision] = useState("");
+  const [decision, setDecision] = useState(0);
+  const [loanAmount, setLoanAmount] = useState(null);
 
   const [show, setShow] = useState(false);
 
@@ -24,24 +25,26 @@ const LoanPage = () => {
       debt: 0,
       loanAmount: 0,
     });
-  };
-  useEffect(() => {
     handleDecision();
-  }, [handleSubmit]);
+  };
 
   const handleDecision = () => {
     const { income, debt, loanAmount } = formData;
 
+    // Convert loanAmount to a number
+    const parsedLoanAmount = parseFloat(loanAmount);
+    setLoanAmount(loanAmount);
+
     // Check if any of the required values is null
-    if (income === 0 || debt === 0 || loanAmount === 0) {
+    if (income === 0 || debt === 0 || isNaN(parsedLoanAmount)) {
       setDecision("Incomplete information");
       return;
     }
 
     const formula = (income - debt) / 3;
-    console.log("Formula:", formula, "Loan Amount:", loanAmount);
+    console.log("Formula:", formula, "Loan Amount:", parsedLoanAmount);
     setDecision(formula);
-    console.log(`this is decison${decision}`);
+    console.log(`this is decision amount ${decision}`);
   };
 
   const handleInputChange = (e) => {
@@ -124,9 +127,7 @@ const LoanPage = () => {
                 Name: {name}, Address: {address}, Income: {income}, Debt: {debt}
                 , Loan Amount: {loanAmount}
                 <div>
-                  <div>
-                    {decision <= formData.loanAmount ? "granted" : "denied"}
-                  </div>
+                  <div>{decision >= loanAmount ? "granted" : "denied"}</div>
                 </div>
               </li>
             );
