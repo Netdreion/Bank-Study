@@ -44,6 +44,7 @@ const Investing = () => {
 
       {show && receivedStockData && (
         <div className="table-container">
+          <h3>Stocks Table</h3>
           <table>
             <thead>
               <tr>
