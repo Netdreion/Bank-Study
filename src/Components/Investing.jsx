@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { TbArrowBigDownLines } from "react-icons/tb";
 import { TbArrowBigUpLinesFilled } from "react-icons/tb";
+import { TfiCrown } from "react-icons/tfi";
+import { TfiStatsDown } from "react-icons/tfi";
 
 const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
@@ -71,10 +73,30 @@ const Investing = () => {
                       <TbArrowBigUpLinesFilled />
                     )}
                   </td>
-                  <td>{stock.d}</td>
-                  <td>{stock.dp}</td>
-                  <td>{stock.h}</td>
-                  <td>{stock.l}</td>
+                  <td>
+                    {stock.d}
+                    {stock.d < 0 ? (
+                      <TbArrowBigDownLines />
+                    ) : (
+                      <TbArrowBigUpLinesFilled />
+                    )}
+                  </td>
+                  <td>
+                    {stock.dp}
+                    {stock.d < 0 ? (
+                      <TbArrowBigDownLines />
+                    ) : (
+                      <TbArrowBigUpLinesFilled />
+                    )}
+                  </td>
+                  <td>
+                    {stock.h}
+                    <TfiCrown />
+                  </td>
+                  <td>
+                    {stock.l}
+                    <TfiStatsDown />
+                  </td>
                   <td>{stock.pc}</td>
                 </tr>
               ))}
