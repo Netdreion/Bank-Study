@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { TbArrowBigDownLines } from "react-icons/tb";
+import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 
 const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
@@ -61,7 +63,14 @@ const Investing = () => {
               {receivedStockData.map((stock, index) => (
                 <tr key={index}>
                   <td>{symbols[index]}</td>
-                  <td>{stock.c}</td>
+                  <td>
+                    {stock.c}
+                    {stock.pc > stock.c ? (
+                      <TbArrowBigDownLines />
+                    ) : (
+                      <TbArrowBigUpLinesFilled />
+                    )}
+                  </td>
                   <td>{stock.d}</td>
                   <td>{stock.dp}</td>
                   <td>{stock.h}</td>
