@@ -14,7 +14,8 @@ body {
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
   padding: 20px;
-  background-color: #388bf1;
+  background-color: #824bf7;
+  accent-color: rgb(153, 29, 248);
   min-height: 100vh;
 }
 
@@ -25,10 +26,10 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: #67aecc;
+  background-color: #7253fc;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(101, 64, 247, 0.941);
   color: #007bff;
 }
 
@@ -89,7 +90,7 @@ input[type="date"] {
 
 /* Context information */
 .context-info {
-  background-color: #0056b3;
+  background-color: #733cf3;
   color: #fff;
   padding: 10px;
   border-radius: 5px;
@@ -108,7 +109,7 @@ input[type="date"] {
 
 /* Table headers */
 th {
-  background-color: #007bff;
+  background-color: #754ffbe6;
   color: #fff;
   padding: 12px;
   text-align: center;
@@ -116,6 +117,7 @@ th {
 
 /* Table rows */
 td {
+  flood-color: #db3cf3;
   padding: 10px;
   text-align: center;
 }
@@ -132,12 +134,12 @@ tbody tr:nth-child(odd) {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #fff;
+  background-color: #b381fe;
 }
 
 /* Hover effect for rows */
 tbody tr:hover {
-  background-color: #f0f0f0;
+  background-color: #9fffac;
   transition: background-color 0.3s ease;
 }
 

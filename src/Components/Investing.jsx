@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { TbArrowBigDownLines } from "react-icons/tb";
-import { TbArrowBigUpLinesFilled } from "react-icons/tb";
-import { TfiCrown } from "react-icons/tfi";
-import { TfiStatsDown } from "react-icons/tfi";
+import { TbArrowBigDownLines, TbArrowBigUpLinesFilled } from "react-icons/tb";
+import { TfiCrown, TfiStatsDown } from "react-icons/tfi";
 
 const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
@@ -13,23 +11,38 @@ const Investing = () => {
   const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
   const symbols = ["AAPL", "MSFT", "AMZN"];
-  //const cryptoSymbolsEndpoint = `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`;
-  const cryptoSymbols = ["ETHBTC", "BINANCE:LTCBTC", "BINANCE:BNBBTC"];
+  const cryptoSymbols = ["BTC", "ETH", "SOL", "DOGE"];
 
   const cryptoFetch = async () => {
     try {
-      const cryptoPromises = cryptoSymbols
-        .map((symbol) =>
-          fetch(
-            `${url}/crypto/symbol=${symbol}?exchange=${exchange}&token=${apiKey}`
-          )
-        )
-        .then((response) => response.json());
+      const response = await fetch(
+        `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`
+      );
+      const data = await response.json();
 
-      const cryptoResolvedData = await Promise.all(cryptoPromises);
-      setReceivedCryptoData(cryptoResolvedData);
+      // Filter only BTC, ETH, Solana, and Dogecoin
+      const filteredCryptoData = data.filter((crypto) =>
+        cryptoSymbols.includes(crypto.symbol)
+      );
+
+      // Fetch live prices for filtered cryptocurrencies
+      const cryptoPricesPromises = filteredCryptoData.map((crypto) =>
+        fetch(`${url}/quote?symbol=${crypto.symbol}&token=${apiKey}`).then(
+          (response) => response.json()
+        )
+      );
+
+      const cryptoPrices = await Promise.all(cryptoPricesPromises);
+
+      // Merge live prices with existing crypto data
+      const updatedCryptoData = filteredCryptoData.map((crypto, index) => ({
+        ...crypto,
+        livePrice: cryptoPrices[index].c, // Assuming 'c' represents the current price
+      }));
+
+      setReceivedCryptoData(updatedCryptoData);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching crypto symbols:", error);
     }
   };
 
@@ -122,29 +135,34 @@ const Investing = () => {
         </div>
       )}
 
-      {show && receivedCryptoData && (
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Crypto</th>
-                <th>Price</th>
-                <th>Daily Change</th>
-                {/* Add other crypto columns as needed */}
-              </tr>
-            </thead>
-            <tbody>
-              {receivedCryptoData.map((crypto, index) => (
-                <tr key={index}>
-                  <td>{cryptoSymbols[index]}</td>
-                  <td>{crypto.c}</td>
-                  <td>{crypto.d}</td>
+      {show &&
+        receivedCryptoData &&
+        Array.isArray(receivedCryptoData) &&
+        receivedCryptoData.length > 0 && (
+          <div className="table-container">
+            <h3>Crypto Table</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Crypto</th>
+                  <th>Symbol</th>
+                  <th>Live Price</th>
+                  {/* Add other crypto columns as needed */}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {receivedCryptoData.map((crypto, index) => (
+                  <tr key={index}>
+                    <td>{crypto.description}</td>
+                    <td>{crypto.symbol}</td>
+                    <td>{crypto.livePrice}</td>
+                    {/* Add other crypto properties as needed */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
     </div>
   );
 };
