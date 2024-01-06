@@ -13,8 +13,25 @@ const Investing = () => {
   const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
   const symbols = ["AAPL", "MSFT", "AMZN"];
-  const cryptoSymbolsEndpoint = `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`;
+  //const cryptoSymbolsEndpoint = `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`;
   const cryptoSymbols = ["ETHBTC", "BINANCE:LTCBTC", "BINANCE:BNBBTC"];
+
+  const cryptoFetch = async () => {
+    try {
+      const cryptoPromises = cryptoSymbols
+        .map((symbol) =>
+          fetch(
+            `${url}/crypto/symbol=${symbol}?exchange=${exchange}&token=${apiKey}`
+          )
+        )
+        .then((response) => response.json());
+
+      const cryptoResolvedData = await Promise.all(cryptoPromises);
+      setReceivedCryptoData(cryptoResolvedData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +49,7 @@ const Investing = () => {
         console.error(error);
       }
     };
-
+    cryptoFetch();
     fetchData();
   }, []);
 
