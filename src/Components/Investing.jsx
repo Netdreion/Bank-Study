@@ -10,7 +10,7 @@ const Investing = () => {
   const [receivedStockData, setReceivedStockData] = useState(null);
   const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
-  const symbols = ["AAPL", "MSFT", "AMZN"];
+  const symbols = ["TSLA", "AAPL", "MSFT", "AMZN"];
   const cryptoSymbols = ["BTC", "ETH", "SOL", "DOGE"];
 
   const cryptoFetch = async () => {
@@ -20,7 +20,6 @@ const Investing = () => {
       );
       const data = await response.json();
 
-      // Filter only BTC, ETH, Solana, and Dogecoin
       const filteredCryptoData = data.filter((crypto) =>
         cryptoSymbols.includes(crypto.symbol)
       );
@@ -41,6 +40,7 @@ const Investing = () => {
       }));
 
       setReceivedCryptoData(updatedCryptoData);
+      console.log(receivedCryptoData);
     } catch (error) {
       console.error("Error fetching crypto symbols:", error);
     }
