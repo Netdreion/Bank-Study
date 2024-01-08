@@ -7,9 +7,18 @@ const url = "https://finnhub.io/api/v1";
 
 const Investing = () => {
   const [receivedStockData, setReceivedStockData] = useState(null);
-  const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
-  const symbols = ["TSLA", "AAPL", "MSFT", "AMZN"];
+  const [stockValue, setStockValue] = useState("");
+
+  const [symbols, setSymbols] = useState(["TSLA", "AAPL", "MSFT", "AMZN"]);
+
+  const inputStockValue = (e) => {
+    setStockValue(e.target.value);
+  };
+
+  const handleStockValue = () => {
+    setSymbols([...symbols, stockValue]);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +38,7 @@ const Investing = () => {
     };
 
     fetchData();
-  }, []);
+  }, [symbols]);
 
   return (
     <div>
@@ -43,6 +52,16 @@ const Investing = () => {
 
       {show && receivedStockData && (
         <div className="table-container">
+          <div>
+            <span>
+              <input
+                value={stockValue}
+                onChange={inputStockValue}
+                placeholder="enter stock syybol"
+              />
+              <button onClick={handleStockValue}>Add Stock</button>
+            </span>
+          </div>
           <h3>Stocks Table</h3>
           <table>
             <thead>
@@ -99,35 +118,6 @@ const Investing = () => {
           </table>
         </div>
       )}
-
-      {show &&
-        receivedCryptoData &&
-        Array.isArray(receivedCryptoData) &&
-        receivedCryptoData.length > 0 && (
-          <div className="table-container">
-            <h3>Crypto Table</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Crypto</th>
-                  <th>Symbol</th>
-                  <th>Live Price</th>
-                  {/* Add other crypto columns as needed */}
-                </tr>
-              </thead>
-              <tbody>
-                {receivedCryptoData.map((crypto, index) => (
-                  <tr key={index}>
-                    <td>{crypto.description}</td>
-                    <td>{crypto.symbol}</td>
-                    <td>{crypto.livePrice}</td>
-                    {/* Add other crypto properties as needed */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
     </div>
   );
 };
