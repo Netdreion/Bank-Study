@@ -4,47 +4,12 @@ import { TfiCrown, TfiStatsDown } from "react-icons/tfi";
 
 const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
-const exchange = "binance";
 
 const Investing = () => {
   const [receivedStockData, setReceivedStockData] = useState(null);
   const [receivedCryptoData, setReceivedCryptoData] = useState(null);
   const [show, setShow] = useState(false);
   const symbols = ["TSLA", "AAPL", "MSFT", "AMZN"];
-  const cryptoSymbols = ["BTC", "ETH", "SOL", "DOGE"];
-
-  const cryptoFetch = async () => {
-    try {
-      const response = await fetch(
-        `${url}/crypto/symbol?exchange=${exchange}&token=${apiKey}`
-      );
-      const data = await response.json();
-
-      const filteredCryptoData = data.filter((crypto) =>
-        cryptoSymbols.includes(crypto.symbol)
-      );
-
-      // Fetch live prices for filtered cryptocurrencies
-      const cryptoPricesPromises = filteredCryptoData.map((crypto) =>
-        fetch(`${url}/quote?symbol=${crypto.symbol}&token=${apiKey}`).then(
-          (response) => response.json()
-        )
-      );
-
-      const cryptoPrices = await Promise.all(cryptoPricesPromises);
-
-      // Merge live prices with existing crypto data
-      const updatedCryptoData = filteredCryptoData.map((crypto, index) => ({
-        ...crypto,
-        livePrice: cryptoPrices[index].c, // Assuming 'c' represents the current price
-      }));
-
-      setReceivedCryptoData(updatedCryptoData);
-      console.log(receivedCryptoData);
-    } catch (error) {
-      console.error("Error fetching crypto symbols:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +27,7 @@ const Investing = () => {
         console.error(error);
       }
     };
-    cryptoFetch();
+
     fetchData();
   }, []);
 
