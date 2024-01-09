@@ -13,7 +13,11 @@ const Investing = () => {
   const [symbols, setSymbols] = useState(["TSLA", "AAPL", "MSFT", "AMZN"]);
 
   const inputStockValue = (e) => {
-    setStockValue(e.target.value);
+    if (stockValue === null) {
+      alert("pls enter a valid value");
+    } else {
+      setStockValue(e.target.value);
+    }
   };
 
   const handleStockValue = () => {
