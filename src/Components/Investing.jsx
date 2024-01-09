@@ -5,12 +5,17 @@ import { TfiCrown, TfiStatsDown } from "react-icons/tfi";
 const apiKey = "cl4otr9r01qrlanq0sl0cl4otr9r01qrlanq0slg";
 const url = "https://finnhub.io/api/v1";
 
+const storedSymbols = localStorage.getItem("symbols");
+const initialSymbols = storedSymbols
+  ? JSON.parse(storedSymbols)
+  : ["TSLA", "AAPL", "MSFT", "AMZN"];
+
 const Investing = () => {
   const [receivedStockData, setReceivedStockData] = useState(null);
   const [show, setShow] = useState(false);
   const [stockValue, setStockValue] = useState("");
 
-  const [symbols, setSymbols] = useState(["TSLA", "AAPL", "MSFT", "AMZN"]);
+  const [symbols, setSymbols] = useState(initialSymbols);
 
   const inputStockValue = (e) => {
     if (stockValue === null) {
@@ -25,6 +30,8 @@ const Investing = () => {
   };
 
   useEffect(() => {
+    localStorage.setItem("symbols", JSON.stringify(symbols));
+
     const fetchData = async () => {
       try {
         // Fetch stock data
